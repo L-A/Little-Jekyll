@@ -22,18 +22,24 @@ this.newServer = function(requester, id, path) {
 
 this.startServer = function(path) {
   path = escape(path);
-  var serverProcess = childProcess.spawn(process.env.SHELL, ['-c', 'cd ' + path + ' && jekyll serve']);
+  var serverProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll serve"]);
 
   return serverProcess;
 }
 
 this.createNewSite = function(requester, path) {
-  var creatorProcess = childProcess.spawn(process.env.SHELL, ['-c', 'cd ' + path + ' && jekyll new .']);
+  var creatorProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll new ."]);
 
   creatorProcess.stdout.on('data',
     function (data) {
       sitesStore.addSite(requester, path);
-    });
+    }
+  );
+  creatorProcess.stderr.on('data',
+    function (data) {
+      console.log("Creator error: " + data);
+    }
+  );
 }
 
 var updateHandlers = [

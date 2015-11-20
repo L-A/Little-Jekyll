@@ -60,10 +60,8 @@ this.addSite = function(requester, filePaths) {
 }
 
 this.createSite = function(requester) {
-
-  var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
+  var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]}).replace(/["']/g, "");
 
   fs.mkdir(folderPath);
-
   jekyllController.createNewSite(requester, folderPath);
 }
