@@ -1,0 +1,9 @@
+@keyframes flash {
+  from {
+    background-color: $primary-color;
+  }
+
+  to {
+    background-color: $switch-bg;
+  }
+}
