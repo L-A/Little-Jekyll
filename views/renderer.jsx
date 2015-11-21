@@ -1,8 +1,6 @@
 var React = require('react');
 var UI = require('./ui.jsx');
 
-require('electron-compile').init();
-
 var remote = require('remote');
 var app = remote.require('app');
 var ipc = require('ipc');
