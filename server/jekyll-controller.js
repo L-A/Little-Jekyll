@@ -21,7 +21,6 @@ this.newServer = function(requester, id, path) {
 }
 
 this.startServer = function(path) {
-  path = escape(path);
   var serverProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll serve"]);
 
   return serverProcess;
