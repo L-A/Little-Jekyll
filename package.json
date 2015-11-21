@@ -4,7 +4,6 @@
   "main": "main.js",
   "dependencies": {
     "babel": "^5.8.33",
-    "electron-compile": "^1.0.1",
     "electron-prebuilt": "0.34.0",
     "react": "^0.13.3"
   },

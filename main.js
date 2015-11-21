@@ -4,7 +4,6 @@ var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 var dispatcher = require('./server/dispatcher.js');
-var devCompile = require('./server/electron-compile-plug.js');
 var mainWindow = null;
 
 // Quit when all windows are closed.
