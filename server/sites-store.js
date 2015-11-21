@@ -37,7 +37,6 @@ this.addSite = function(requester, filePaths) {
   // (or split into handling the general OS "open" command and only manage the dialog here)
 
   var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory' ]});
-  console.log(filePaths);
 
   if ( filePaths != undefined ) {
     for (i = 0; i < filePaths.length; i++) {
@@ -60,8 +59,10 @@ this.addSite = function(requester, filePaths) {
 }
 
 this.createSite = function(requester) {
-  var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]}).replace(/["']/g, "");
-
-  fs.mkdir(folderPath);
-  jekyllController.createNewSite(requester, folderPath);
+  var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
+  if ( folderPath != undefined ) {
+    folderPath = folderPath.replace(/["']/g, "");
+    fs.mkdir(folderPath);
+    jekyllController.createNewSite(requester, folderPath);
+  };
 }
