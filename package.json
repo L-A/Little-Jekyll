@@ -8,9 +8,11 @@
     "react": "^0.13.3"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . releases --platform=darwin --arch=x64 --version=0.34.0"
   },
   "devDependencies": {
-    "electron-compilers": "^1.0.1"
+    "electron-compilers": "^1.0.1",
+    "electron-packager": "^5.1.1"
   }
 }
