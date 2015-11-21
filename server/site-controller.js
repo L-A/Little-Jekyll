@@ -16,7 +16,6 @@ this.reportRunningServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverActive', true);
 
   sitesStore.sendSitesList(sender);
-  console.log("Up! Nice.");
 }
 
 this.stopServerOnSite = function(sender, siteID) {
@@ -28,5 +27,4 @@ this.stopServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'server', undefined);
 
   sitesStore.sendSitesList(sender);
-  console.log("Down! Neato.");
 }
