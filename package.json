@@ -1,6 +1,7 @@
 {
-  "name": "Jekyll-App",
+  "name": "little-jekyll",
   "version": "0.0.1",
+  "description": "A desktop app to manage Jekyll",
   "main": "main.js",
   "dependencies": {
     "babel": "^5.8.33",
@@ -14,5 +15,6 @@
   "devDependencies": {
     "electron-compilers": "^1.0.1",
     "electron-packager": "^5.1.1"
-  }
+  },
+  "author": "Louis-André Labadie"
 }
