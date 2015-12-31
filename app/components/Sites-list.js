@@ -1,6 +1,6 @@
-var React = require('react');
-var Site = require('./site.jsx');
-var dispatcher = require('./dispatcher.jsx');
+import React, { Component } from 'react';
+import Site from './Site';
+import dispatcher from './Dispatcher';
 
 var SitesList = React.createClass({
   getInitialState: function() {
@@ -11,8 +11,8 @@ var SitesList = React.createClass({
     dispatcher.send('getSitesList');
   },
   receiveSitesList: function( list ) {
-    this.setState({sites: list});
     console.log(list);
+    this.setState({sites: list});
   },
   render: function () {
     var siteNodes = this.state.sites.map( function(data){

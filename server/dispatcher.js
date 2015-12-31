@@ -1,6 +1,6 @@
-var ipc = require('ipc');
-var sitesStore = require('./sites-store.js');
-var siteController = require('./site-controller.js');
+import ipc from 'ipc';
+import sitesStore from './sites-store.js';
+import siteController from './site-controller.js';
 
 ipc.on('getSitesList', function(event) {
   sitesStore.sendSitesList(event.sender);

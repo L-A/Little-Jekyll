@@ -1,8 +1,8 @@
-var React = require('react');
+import React, { Component } from 'react';
 
-var TitleBar = require('./title-bar.jsx');
-var SitesList = require('./sites-list.jsx');
-var OptionsBar = require('./options-bar.jsx');
+import TitleBar from './Title-bar';
+import SitesList from './Sites-list';
+import OptionsBar from './Options-bar';
 
 var UI = React.createClass({
   render: function() {

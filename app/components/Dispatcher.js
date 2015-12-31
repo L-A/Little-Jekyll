@@ -1,4 +1,4 @@
-var ipc = require('ipc');
+import ipc from 'ipc';
 
 var dispatcher = {
   send : function(message, content) {

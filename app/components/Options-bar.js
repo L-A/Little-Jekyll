@@ -1,5 +1,5 @@
-var React = require('react');
-var Dispatcher = require('./dispatcher.jsx');
+import React, { Component } from 'react';
+import Dispatcher from './Dispatcher';
 
 var OptionsBar = React.createClass({
   requestNewSite: function() {

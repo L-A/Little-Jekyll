@@ -1,5 +1,5 @@
-var React = require('react');
-var Dispatcher = require('./dispatcher.jsx');
+import React, { Component } from 'react';
+var Dispatcher = require('./dispatcher.js');
 var shell = require('shell');
 
 var Site = React.createClass({

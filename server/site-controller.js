@@ -1,7 +1,7 @@
-var sitesStore = require('./sites-store.js');
-var jekyllController = require('./jekyll-controller.js');
+import sitesStore from './sites-store.js';
+import jekyllController from './jekyll-controller.js';
 
-this.startServerOnSite = function(sender, siteID) {
+exports.startServerOnSite = function(sender, siteID) {
   var site = sitesStore.siteById(siteID);
   var newServer = jekyllController.newServer(sender, site.id, site.filePath);
 
@@ -11,14 +11,14 @@ this.startServerOnSite = function(sender, siteID) {
   sitesStore.sendSitesList(sender);
 }
 
-this.reportRunningServerOnSite = function(sender, siteID) {
+exports.reportRunningServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverRequested', false);
   sitesStore.setSiteProperty(siteID, 'serverActive', true);
 
   sitesStore.sendSitesList(sender);
 }
 
-this.stopServerOnSite = function(sender, siteID) {
+exports.stopServerOnSite = function(sender, siteID) {
   var server = sitesStore.siteById(siteID).server;
 
   jekyllController.stopServer(server);

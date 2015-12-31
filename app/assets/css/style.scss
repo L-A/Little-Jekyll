@@ -34,6 +34,10 @@ body {
   margin: 0;
 }
 
+.ui-root > div {
+  height: 100%;
+}
+
 .title-bar {
   flex: 0 0 $title-bar-height;
   justify-content: space-between;

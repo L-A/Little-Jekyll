@@ -1,13 +1,16 @@
-var ipc = require('ipc');
-var childProcess = require('child_process');
-var sitesStore = require('./sites-store.js');
-var siteController = require('./site-controller.js');
+import { ipc } from 'ipc';
+import childProcess from 'child_process';
+import sitesStore from './sites-store.js';
+import siteController from './site-controller.js';
+import dialog from 'dialog';
 
-this.newServer = function(requester, id, path) {
+import {getPath} from 'consistent-path'
+
+exports.newServer = function(requester, id, path) {
   var server = {
     siteID : id,
     reportTo : requester,
-    process : (this.startServer(path)),
+    process : (startServer(path)),
     localURL : undefined
   };
 
@@ -20,13 +23,7 @@ this.newServer = function(requester, id, path) {
   return server;
 }
 
-this.startServer = function(path) {
-  var serverProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll serve"]);
-
-  return serverProcess;
-}
-
-this.createNewSite = function(requester, path) {
+exports.createNewSite = function(requester, path) {
   var creatorProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll new ."]);
 
   creatorProcess.stdout.on('data',
@@ -90,9 +87,15 @@ var updateHandlers = [
   }
 ];
 
-serverUpdate = function(server, data) {
+var startServer = function(path) {
+  var serverProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll serve"]);
+
+  return serverProcess;
+}
+
+var serverUpdate = function(server, data) {
   data = data.toString();
-  for (i = 0; i < updateHandlers.length; i++) {
+  for (var i = 0; i < updateHandlers.length; i++) {
     if (data.search(updateHandlers[i].str) != -1) {
       updateHandlers[i].handler(server, data);
      return;
@@ -101,6 +104,8 @@ serverUpdate = function(server, data) {
   console.log("no match: " + data);
 }
 
-this.stopServer = function(server) {
+exports.stopServer = function(server) {
   server.process.kill();
 }
+
+console.log(process.env.PATH);

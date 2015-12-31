@@ -1,4 +1,4 @@
-var React = require('react');
+import React, { Component } from 'react';
 
 var TitleBar = React.createClass({
   render: function () {
