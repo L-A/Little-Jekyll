@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Site from './Site';
-import dispatcher from './Dispatcher';
+import dispatcher from '../utils/Dispatcher';
 
 var SitesList = React.createClass({
   getInitialState: function() {

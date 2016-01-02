@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-var Dispatcher = require('./dispatcher.js');
-var shell = require('shell');
+import Dispatcher from '../utils/dispatcher';
+import shell from 'shell';
 
 var Site = React.createClass({
   toggleServerState: function() {
