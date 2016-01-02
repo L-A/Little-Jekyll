@@ -1,19 +1,18 @@
 import fs from 'fs';
 import dialog from 'dialog';
-import dispatcher from './dispatcher.js';
-import jekyllController from './jekyll-controller.js';
+import dispatcher from './dispatcher';
+import jekyllController from './jekyll-controller';
+import storage from './storage';
 
-var sitesList = [
-  {
-    id: 2,
-    name: "Dummy site",
-    filePath: "/Users/lalabadie/git/l-a.github.io",
-    configFile: "_config.yml",
-    serverActive: false,
-    serverRequested: false,
-    server: null
+var sitesList = [];
+
+var initSitesList = function(sitesData) {
+  if(sitesData) {
+    sitesList = sitesData;
   }
-];
+}
+
+storage.attemptToOpenSitesList(initSitesList); // Storage module returns to initSitesList
 
 exports.siteById = function(id) {
   for (var i=0; i<sitesList.length; i++) {
@@ -28,12 +27,9 @@ exports.setSiteProperty = function(id, property, value) {
   site[property] = value;
 }
 
-var sendSitesList = function(sender) {
-  sender.send('updateSitesList', sitesList);
-};
-
 exports.sendSitesList = function(sender) {
   sender.send('updateSitesList', sitesList);
+  storage.updateSitesList(sitesList);
 }
 
 exports.addSite = function(sender, filePaths) {
@@ -58,7 +54,7 @@ exports.addSite = function(sender, filePaths) {
       });
     }
 
-    sendSitesList(sender);
+    exports.sendSitesList(sender);
   }
 }
 

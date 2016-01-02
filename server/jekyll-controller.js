@@ -105,5 +105,3 @@ var serverUpdate = function(server, data) {
 exports.stopServer = function(server) {
   server.process.kill();
 }
-
-console.log(process.env.PATH);
