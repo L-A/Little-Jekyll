@@ -20,10 +20,31 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+  if (process.platform !== 'darwin') app.quit()
+  else mainWindow = null;
 });
 
-app.on('ready', () => {
+var shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+  // Someone tried to run a second instance, we should focus our window
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+  return true;
+});
+
+if (shouldQuit) {
+  app.quit();
+  return;
+}
+
+app.on('ready', function() { initMainWindow() });
+app.on('activate', function() {
+  if (mainWindow == null) { initMainWindow() }
+  else { (mainWindow.show()) }
+});
+
+var initMainWindow = function () {
   mainWindow = new BrowserWindow({
     frame: false,
     width: 340,
@@ -142,7 +163,7 @@ app.on('ready', () => {
       }, {
         label: 'Close',
         accelerator: 'Command+W',
-        selector: 'performClose:'
+        selector: 'hide:'
       }, {
         type: 'separator'
       }, {
@@ -243,4 +264,4 @@ app.on('ready', () => {
     menu = Menu.buildFromTemplate(template);
     mainWindow.setMenu(menu);
   }
-});
+};
