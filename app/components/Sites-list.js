@@ -10,7 +10,7 @@ var SitesList = React.createClass({
   componentDidMount: function() {
     dispatcher.send('getSitesList');
   },
-  receiveSitesList: function( list ) {
+  receiveSitesList: function( event, list ) {
     console.log(list);
     this.setState({sites: list});
   },

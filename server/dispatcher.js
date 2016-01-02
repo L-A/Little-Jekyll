@@ -1,24 +1,24 @@
-import ipc from 'ipc';
+import {ipcMain} from 'electron';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
 
-ipc.on('getSitesList', function(event) {
+ipcMain.on('getSitesList', function(event) {
   sitesStore.sendSitesList(event.sender);
 });
 
-ipc.on('addSite', function(event) {
+ipcMain.on('addSite', function(event) {
   sitesStore.addSite(event.sender);
 });
 
-ipc.on('createSite', function(event) {
+ipcMain.on('createSite', function(event) {
   sitesStore.createSite(event.sender);
 });
 
-ipc.on('startServer', function(event, siteId) {
+ipcMain.on('startServer', function(event, siteId) {
   siteController.startServerOnSite(event.sender, siteId);
 });
 
-ipc.on('stopServer', function(event, siteId) {
+ipcMain.on('stopServer', function(event, siteId) {
   siteController.stopServerOnSite(event.sender, siteId);
 });
 

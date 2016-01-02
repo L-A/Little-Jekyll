@@ -1,18 +1,26 @@
-import ipc from 'ipc';
+import {ipcRenderer} from 'electron';
 
 var dispatcher = {
-  send : function(message, content) {
+  send: function(message, content) {
     console.log("sending " + message);
     content = content || null;
     if (content == null) {
-      ipc.send(message);
+      ipcRenderer.send(message);
     } else {
-      ipc.send(message, content);
+      ipcRenderer.send(message, content);
     }
   },
   createCallback: function(channel, callback) {
-    ipc.on(channel, callback);
+    ipcRenderer.on(channel, callback);
   }
 }
+
+ipcRenderer.on("log", function(event, ...args) {
+  console.log("--- Server event ---");
+  args.forEach(function(arg){
+    console.log(arg);
+  });
+  console.log("--- Fin ---");
+});
 
 module.exports = dispatcher;

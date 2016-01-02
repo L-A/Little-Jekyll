@@ -8,7 +8,7 @@ Current status: Pretty functional if Jekyll is installed.
 - [X] Basic application framework
 - [X] Jekyll server thread manager & UI
 - [X] Allow creation of a new Jekyll site straight from Little Jekyll 🎉
-- [ ] Switch over to the update IPC scheme
+- [X] Switch over to the updated IPC scheme
 - [ ] Persist sites list & state
 - [ ] Interactive installer for systems where Jekyll isn't available or found
 - [ ] Jekyll version picker / detection (at least for the latest stable, and the current Github supported version)

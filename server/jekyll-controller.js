@@ -1,10 +1,8 @@
-import { ipc } from 'ipc';
+import { ipcMain } from 'electron';
 import childProcess from 'child_process';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
 import dialog from 'dialog';
-
-import {getPath} from 'consistent-path'
 
 exports.newServer = function(requester, id, path) {
   var server = {
