@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dispatcher from '../utils/Dispatcher';
+import Dispatcher from '../utils/front-end-dispatcher';
 
 var OptionsBar = React.createClass({
   requestNewSite: function() {

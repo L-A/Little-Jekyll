@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dispatcher from '../utils/dispatcher';
+import Dispatcher from '../utils/front-end-dispatcher';
 import shell from 'shell';
 
 var Site = React.createClass({

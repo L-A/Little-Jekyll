@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Site from './Site';
-import dispatcher from '../utils/Dispatcher';
+import Dispatcher from '../utils/front-end-dispatcher';
 
 var SitesList = React.createClass({
   getInitialState: function() {
-    dispatcher.createCallback('updateSitesList', this.receiveSitesList);
+    Dispatcher.createCallback('updateSitesList', this.receiveSitesList);
     return {sites: []};
   },
   componentDidMount: function() {
-    dispatcher.send('getSitesList');
+    Dispatcher.send('getSitesList');
   },
   receiveSitesList: function( event, list ) {
     console.log(list);
