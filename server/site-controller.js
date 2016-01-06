@@ -21,10 +21,11 @@ exports.reportRunningServerOnSite = function(sender, siteID) {
 exports.stopServerOnSite = function(sender, siteID) {
   var server = sitesStore.siteById(siteID).server;
 
-  jekyllController.stopServer(server);
-
-  sitesStore.setSiteProperty(siteID, 'serverActive', false);
-  sitesStore.setSiteProperty(siteID, 'server', undefined);
+  if (server) {
+    jekyllController.stopServer(server);
+    sitesStore.setSiteProperty(siteID, 'serverActive', false);
+    sitesStore.setSiteProperty(siteID, 'server', undefined);
+  }
 
   sitesStore.sendSitesList(sender);
 }

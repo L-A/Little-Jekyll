@@ -1,21 +1,28 @@
 import fs from 'fs';
 import dialog from 'dialog';
 import dispatcher from './dispatcher';
+import siteController from './site-controller';
 import jekyllController from './jekyll-controller';
 import storage from './storage';
 
 var sitesList = [];
+var strippedList = [];
+var initialGetSitesList = true;
 
-var initSitesList = function(sitesData) {
+var initSitesList = function(sitesData, sender) {
   if(sitesData) {
     sitesList = sitesData;
+    for (var i = 0; i < sitesList.length; i++) {
+      if (sitesList[i].serverRequested) {
+        siteController.startServerOnSite(sender, sitesList[i].id);
+      }
+    }
+    exports.sendSitesList(sender);
   }
 }
 
-storage.attemptToOpenSitesList(initSitesList); // Storage module returns to initSitesList
-
 exports.siteById = function(id) {
-  for (var i=0; i<sitesList.length; i++) {
+  for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].id === id) {
       return sitesList[i];
     }
@@ -28,14 +35,16 @@ exports.setSiteProperty = function(id, property, value) {
 }
 
 exports.sendSitesList = function(sender) {
-  sender.send('updateSitesList', sitesList);
-  storage.updateSitesList(sitesList);
+  if (initialGetSitesList) {
+    storage.attemptToOpenSitesList(initSitesList, sender);
+    initialGetSitesList = false;
+  } else {
+    storage.updateSitesList(sitesList);
+    if (sender) sender.send('updateSitesList', sitesList);
+  }
 }
 
 exports.addSite = function(sender, filePaths) {
-  // TODO support multiple directories opening at once
-  // (or split into handling the general OS "open" command and only manage the dialog here)
-
   var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory' ]});
 
   if ( filePaths != undefined ) {
@@ -60,9 +69,18 @@ exports.addSite = function(sender, filePaths) {
 
 exports.createSite = function(sender) {
   var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
+
   if ( folderPath != undefined ) {
     folderPath = folderPath.replace(/["']/g, "");
     fs.mkdir(folderPath);
     jekyllController.createNewSite(sender, folderPath);
   };
+}
+
+exports.stopAllServers = function(id) {
+  for (var i=0; i < sitesList.length; i++) {
+    if (sitesList[i].serverActive) {
+      siteController.stopServerOnSite(dispatcher.reporter, sitesList[i].id);
+    }
+  }
 }

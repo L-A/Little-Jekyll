@@ -38,6 +38,10 @@ if (shouldQuit) {
   return;
 }
 
+app.on('will-quit', function() {
+  appServer.handleWillQuit();
+})
+
 app.on('ready', function() { initMainWindow() });
 app.on('activate', function() {
   if (mainWindow == null) { initMainWindow() }

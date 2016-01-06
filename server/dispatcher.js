@@ -33,6 +33,11 @@ exports.report = function(message){
 
 exports.reporter = reporter;
 
+exports.handleWillQuit = function() {
+  sitesStore.sendSitesList(reporter);
+  sitesStore.stopAllServers();
+}
+
 /*
   Draft:
   Depuis le client
