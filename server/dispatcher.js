@@ -1,6 +1,11 @@
 import {ipcMain} from 'electron';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
+var reporter = null;
+
+ipcMain.on('hello', function(event) {
+  reporter = event.sender;
+})
 
 ipcMain.on('getSitesList', function(event) {
   sitesStore.sendSitesList(event.sender);
@@ -21,6 +26,12 @@ ipcMain.on('startServer', function(event, siteId) {
 ipcMain.on('stopServer', function(event, siteId) {
   siteController.stopServerOnSite(event.sender, siteId);
 });
+
+exports.report = function(message){
+  if ( reporter ) reporter.send('report', message);
+}
+
+exports.reporter = reporter;
 
 /*
   Draft:

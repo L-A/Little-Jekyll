@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TitleBar from './Title-bar';
 import SitesList from './Sites-list';
 import OptionsBar from './Options-bar';
+import Reporter from './Reporter';
 
 var UI = React.createClass({
   render: function() {
