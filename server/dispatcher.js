@@ -37,17 +37,3 @@ exports.handleWillQuit = function() {
   sitesStore.sendSitesList(reporter);
   sitesStore.stopAllServers();
 }
-
-/*
-  Draft:
-  Depuis le client
-  - Get sites list → updateSitesList(array)
-  - Add site → updateSitesList(array)
-  - Remove site → updateSitesList(array)
-
-  - Start server → updateSite(site ID, {site properties})
-  - Stop server (site ID) → updateSite(site ID, {site properties})
-
-  Depuis le serveur
-  - updateSite(site ID, {site properties})
-*/
