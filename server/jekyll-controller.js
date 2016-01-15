@@ -2,13 +2,19 @@ import { ipcMain } from 'electron';
 import childProcess from 'child_process';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
-import dialog from 'dialog';
+import dispatcher from './dispatcher';
+import path from 'path';
+
+var jekyllDist = require('electron').app.getAppPath() + '/jekyll/jekyll';
+var usedPorts = []; // Will fill with active servers' used ports
 
 exports.newServer = function(requester, id, path) {
+  var port = firstAvailablePort();
   var server = {
     siteID : id,
     reportTo : requester,
-    process : (startServer(path)),
+    process : (startServer(path, port)),
+    port : port,
     localURL : undefined
   };
 
@@ -21,12 +27,14 @@ exports.newServer = function(requester, id, path) {
   return server;
 }
 
-exports.createNewSite = function(requester, path) {
-  var creatorProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll new ."]);
+exports.createNewSite = function(requester, dir) {
+
+  var creatorProcess = childProcess.spawn(jekyllDist, ["new", dir]);
 
   creatorProcess.stdout.on('data',
     function (data) {
-      sitesStore.addSite(requester, path);
+      dispatcher.report(data.toString());
+      sitesStore.addSite(requester, dir);
     }
   );
   creatorProcess.stderr.on('data',
@@ -81,27 +89,58 @@ var updateHandlers = [
     handler: function (server, data) {
       var url = data.match("(http.*/)");
       server.localURL = url[url.length-1];
+      sitesStore.sendSitesList(server.reportTo);
     }
   }
 ];
 
-var startServer = function(path) {
-  var serverProcess = childProcess.spawn(process.env.SHELL, ["-c", "cd '" + path + "' && jekyll serve"]);
+var startServer = function(dir, port) {
+  // dir = dir.replace(/ /g, "\\ ");
+  var destinationDir = path.join(dir, "_site"); // Needed, otherwise Jekyll servers may try writing to fs root
+
+  var cmdLineArgs = ["serve", "--source", dir, "--destination", destinationDir, "--port", port];
+
+  dispatcher.report(cmdLineArgs);
+
+  dispatcher.report(childProcess.spawnSync('echo', cmdLineArgs).output.toString());
+  var serverProcess = childProcess.spawn(jekyllDist, cmdLineArgs);
 
   return serverProcess;
 }
 
 var serverUpdate = function(server, data) {
   data = data.toString();
+  dispatcher.report(data);
   for (var i = 0; i < updateHandlers.length; i++) {
     if (data.search(updateHandlers[i].str) != -1) {
       updateHandlers[i].handler(server, data);
-     return;
      }
   }
   console.log("no match: " + data);
 }
 
+var firstAvailablePort = function () {
+  var port = 4000;
+
+  for(var i = 0; i < usedPorts.length; i++) {
+    if (port == usedPorts[i]) port++;
+  }
+
+  usedPorts.push(port);
+
+  dispatcher.report("Used ports:");
+  dispatcher.report(usedPorts);
+
+  return port;
+}
+
 exports.stopServer = function(server) {
+  for(var i = 0; i < usedPorts.length; i++) {
+    if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
+  }
+
+  dispatcher.report("Used ports:");
+  dispatcher.report(usedPorts);
+
   server.process.kill();
 }
