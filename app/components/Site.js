@@ -32,8 +32,8 @@ var Site = React.createClass({
           <p className="site-folder" onClick={this.openFolder}>{siteInfo.filePath}</p>
         </div>
         <div className="site-options">
+          <a className="btn-edit"></a>
           <a className={siteInfo.serverActive ? 'btn-preview available' : 'btn-preview'} onClick={this.openLocalServer}></a>
-          {/* <a className="btn-edit">Edit</a> */}
         </div>
       </li>
     );
