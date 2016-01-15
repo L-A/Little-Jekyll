@@ -27,3 +27,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# If Sass goes crazy
+.sass-cache
+
+# Compiled by Webpack
+dist/
+release/
