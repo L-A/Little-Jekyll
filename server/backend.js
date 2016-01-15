@@ -1,4 +1,4 @@
-require("babel-register");
+require('babel-core/register');
 var dispatcher = require('./dispatcher.js');
 
 exports.handleWillQuit = function() {

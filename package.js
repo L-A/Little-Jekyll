@@ -22,7 +22,6 @@ const DEFAULT_OPTS = {
   asar: shouldUseAsar,
   ignore: [
     '/test($|/)',
-    '/tools($|/)',
     '/release($|/)'
   ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
 };
