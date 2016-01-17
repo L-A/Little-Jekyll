@@ -71,9 +71,9 @@ var initMainWindow = function () {
 
   if (process.platform === 'darwin') {
     template = [{
-      label: 'Electron',
+      label: 'Little Jekyll',
       submenu: [{
-        label: 'About ElectronReact',
+        label: 'About Little Jekyll',
         selector: 'orderFrontStandardAboutPanel:'
       }, {
         type: 'separator'
@@ -83,7 +83,7 @@ var initMainWindow = function () {
       }, {
         type: 'separator'
       }, {
-        label: 'Hide ElectronReact',
+        label: 'Hide Little Jekyll',
         accelerator: 'Command+H',
         selector: 'hide:'
       }, {
