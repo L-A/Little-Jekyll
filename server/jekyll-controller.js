@@ -2,7 +2,6 @@ import { ipcMain } from 'electron';
 import childProcess from 'child_process';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
-import dispatcher from './dispatcher';
 import path from 'path';
 
 var jekyllDist = require('electron').app.getAppPath() + '/jekyll/jekyll';
@@ -33,10 +32,10 @@ exports.createNewSite = function(requester, dir) {
 
   creatorProcess.stdout.on('data',
     function (data) {
-      dispatcher.report(data.toString());
       sitesStore.addSite(requester, dir);
     }
   );
+
   creatorProcess.stderr.on('data',
     function (data) {
       console.log("Creator error: " + data);
@@ -97,12 +96,8 @@ var updateHandlers = [
 var startServer = function(dir, port) {
   // dir = dir.replace(/ /g, "\\ ");
   var destinationDir = path.join(dir, "_site"); // Needed, otherwise Jekyll servers may try writing to fs root
-
   var cmdLineArgs = ["serve", "--source", dir, "--destination", destinationDir, "--port", port];
 
-  dispatcher.report(cmdLineArgs);
-
-  dispatcher.report(childProcess.spawnSync('echo', cmdLineArgs).output.toString());
   var serverProcess = childProcess.spawn(jekyllDist, cmdLineArgs);
 
   return serverProcess;
@@ -110,7 +105,6 @@ var startServer = function(dir, port) {
 
 var serverUpdate = function(server, data) {
   data = data.toString();
-  dispatcher.report(data);
   for (var i = 0; i < updateHandlers.length; i++) {
     if (data.search(updateHandlers[i].str) != -1) {
       updateHandlers[i].handler(server, data);
@@ -128,9 +122,6 @@ var firstAvailablePort = function () {
 
   usedPorts.push(port);
 
-  dispatcher.report("Used ports:");
-  dispatcher.report(usedPorts);
-
   return port;
 }
 
@@ -138,9 +129,6 @@ exports.stopServer = function(server) {
   for(var i = 0; i < usedPorts.length; i++) {
     if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
   }
-
-  dispatcher.report("Used ports:");
-  dispatcher.report(usedPorts);
 
   server.process.kill();
 }

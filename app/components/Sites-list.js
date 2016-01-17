@@ -11,7 +11,6 @@ var SitesList = React.createClass({
     Dispatcher.send('getSitesList');
   },
   receiveSitesList: function( event, list ) {
-    console.log(list);
     this.setState({sites: list});
   },
   render: function () {
