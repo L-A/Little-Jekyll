@@ -1,0 +1,47 @@
+.title-bar {
+  flex: 0 0 $title-bar-height;
+  justify-content: space-between;
+
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  cursor: default;
+
+  background-color: white;
+  height: 36px;
+  width: 100%;
+
+  z-index: 2;
+
+  box-shadow: 0 0 8px 0 #afb0b5;
+
+  .btn-close, .btn-minimize {
+    cursor: default;
+    display: inline-block;
+    opacity: .4;
+    margin-top: 10px;
+
+    height: 18px;
+    width: 18px;
+
+    &:hover { opacity: 0.75; }
+    &:active { opacity: 1; }
+  }
+
+  .btn-close {
+    background: url(../img/btn_close.svg) center no-repeat;
+    margin-left: 10px;
+  }
+
+  .btn-minimize {
+    background: url(../img/btn_minimize.svg) center no-repeat;
+    margin-left: 6px;
+  }
+
+  .logo {
+    display:block;
+    float: right;
+    margin: 12px 16px;
+    padding-bottom: 3px;
+    vertical-align: baseline;
+  }
+}

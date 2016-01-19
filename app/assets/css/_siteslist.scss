@@ -1,0 +1,239 @@
+$options-panel-width: 150px;
+
+.sites-list {
+  flex: 1 1 auto;
+  margin: 0;
+  position: relative;
+
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1;
+
+  .site-cell {
+    position: relative;
+    z-index: 2;
+
+    &.options-shown .main-panel {
+      transform: translateX(-$options-panel-width + 2);
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+
+    .main-panel{
+      background-color: white;
+      border-bottom: 1px solid #f1f2f2;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      position: relative;
+      z-index: 5;
+
+      transition: transform $timing-snappy ease-out;
+
+      .site-info {
+        flex: 1 1 0;
+        padding: 18px 0;
+        transition: color $timing-snappy linear;
+
+        h1 {
+          color: $primary-text-color;
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 0;
+
+          &.server-active {
+            color: $primary-color;
+          }
+        }
+
+        .site-folder {
+          background: url('../img/icn_folder.svg') left no-repeat;
+          color: $boring-gray;
+          font-size: 11px;
+          padding-left: 12px;
+          padding-top: 2px;
+          min-width: 0;
+          height: 1.3em;
+          overflow: hidden;
+
+          text-overflow: ellipsis;
+          white-space:nowrap;
+
+          transition: color 100ms linear;
+
+          &:hover { color: $primary-text-color; opacity: 1;}
+        }
+      }
+
+      .site-options {
+        flex: 0 0 130px;
+        padding: 4px 0 0;
+        text-align: right;
+
+        .btn-edit, .btn-preview {
+          display: inline-block;
+          height: 24px;
+        }
+
+        .btn-edit {
+          background: $boring-gray;
+          -webkit-mask: url('../img/btn_edit.svg') center no-repeat;
+
+          margin-right: 12px;
+          width: 22px;
+          transition: color $timing-snappy linear, background-color $timing-snappy linear;
+
+          &:hover {
+            background: lighten($boring-gray, 10%);
+          }
+
+          &:active {
+            background: lighten($boring-gray, 15%);
+          }
+        }
+
+        .btn-preview {
+          background: $primary-color;
+          -webkit-mask: url('../img/btn_preview.svg') center no-repeat;
+          -webkit-mask-size: contain;
+          margin-right: 19px;
+          opacity: 0;
+          width: 0;
+
+          vertical-align: top;
+
+          transition: margin-right $timing-snappy $bouncy-ease,
+                      opacity 100ms linear,
+                      width $timing-snappy $bouncy-ease;
+
+          &.available {
+            margin-right: 9px;
+            opacity: 1;
+            width: 18px;
+
+            &:hover { opacity: 0.7; }
+            &:active { opacity: 0.8; }
+          }
+        }
+      }
+
+      .site-serve-switch {
+        display: block;
+        flex: 0 0 38px;
+        padding: 0 8px;
+
+        &:hover .groove .knob { opacity: 0.8; }
+        &:active .groove .knob { opacity: 0.6; }
+
+        .groove {
+          background-color: $switch-bg;
+          border-radius: 11px;
+          padding: $switch-edge-difference;
+          height: ($switch-edge-difference * 2) + ($switch-knob-border-radius * 2) + $switch-knob-length + $switch-movement-length;
+          overflow: hidden;
+          width: ($switch-groove-border-radius * 2);
+          transition: background-color 200ms linear;
+
+          box-shadow: inset 0 2px 2px $light-color;
+
+          .knob {
+            border-radius: 8px;
+            height: ($switch-knob-border-radius * 2) + $switch-knob-length;
+            margin-top: 0;
+            width: $switch-knob-border-radius * 2;
+
+            background-position-y: bottom;
+
+            transition: background-color 100ms linear,
+                        background-position-y $timing-snappy $bouncy-ease,
+                        margin-top $timing-snappy $bouncy-ease,
+                        height $timing-snappy $bouncy-ease,
+                        opacity 200ms linear;
+          }
+        }
+
+
+        &.switch-off .groove .knob {
+          background-color: $boring-gray;
+          margin-top: $switch-movement-length;
+        }
+
+        &.switch-on .groove {
+          background-color: $switch-bg;
+
+         .knob {
+            background-color: $primary-color;
+            margin-top: 0;
+          }
+        }
+
+        &.switch-on:active .groove .knob { opacity: 0.6; }
+
+        &.switch-working .groove {
+          .knob {
+            background: $switch-bg url(../img/icn_rolling.svg) center no-repeat;
+            background-size: $switch-knob-border-radius * 2;
+            margin-top: $switch-movement-length / 2;
+            opacity: 1;
+          }
+        }
+      }
+
+    }
+
+    .secondary-panel {
+      background: linear-gradient(darken($options-bg-color, 10%), $options-bg-color);
+      height: 100%; // Apparently fixes a border flash?
+      width: $options-panel-width;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-left: 10px;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      z-index: 2;
+      box-shadow: inset 0 0 10px darken($options-bg-color, 20%);
+
+      .btn-edit, .btn-remove, .btn-build {
+        background: lighten($options-bg-color, 20%);
+        height: 20px;
+        margin-left: 20px;
+        position: relative;
+        width: 20px;
+
+        transition: background-color $timing-snappy-btn linear;
+
+        &:hover { background: lighten($options-bg-color, 30%); }
+        &:active { background: lighten($options-bg-color, 20%); }
+      }
+
+      .btn-edit {
+        -webkit-mask: url('../img/btn_edit.svg') center no-repeat;
+        background: darken($options-bg-color, 20%);
+        margin-right: 13px;
+
+        &:hover {
+          background: darken($options-bg-color, 10%);
+        }
+
+        &:active {
+          background: darken($options-bg-color, 30%);
+        }
+      }
+
+      .btn-remove {
+        -webkit-mask: url('../img/btn_forget.svg') center no-repeat;
+        margin-top: 2px;
+      }
+
+      .btn-build {
+        -webkit-mask: url('../img/btn_export.svg') center no-repeat;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+.options-bar {
+  display: flex;
+  flex: 0 0 $options-bar-height;
+  flex-direction: row;
+  align-self: flex-end;
+
+  background-color: $options-bg-color;
+  color: $light-color;
+  position: relative;
+  height: $options-bar-height;
+  width: 100%;
+
+  .btn-create, .btn-open, .btn-settings {
+    align-self: center;
+    background: lighten($options-bg-color, 20%);
+    cursor: default;
+    display: inline-block;
+
+    transition: background-color 100ms linear;
+
+    height: 24px;
+    width: 24px;
+
+      &:hover { background: lighten($options-bg-color, 30%); }
+      &:active { background: lighten($options-bg-color, 20%); }
+    }
+
+    .hint-text {
+      align-self: center;
+      text-align: center;
+      flex: 1 0 auto;
+
+      font-size: 12px;
+    }
+
+  .btn-create {
+    -webkit-mask: url(../img/btn_create.svg) center no-repeat;
+    margin-left: 10px;
+  }
+
+  .btn-open {
+    -webkit-mask: url(../img/btn_open.svg) center no-repeat;
+    margin-left: 16px;
+  }
+
+  .btn-settings {
+    -webkit-mask: url(../img/btn_settings.svg) center no-repeat;
+    margin-right: 10px;
+  }
+
+}
