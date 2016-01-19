@@ -77,6 +77,21 @@ exports.createSite = function(sender) {
   };
 }
 
+exports.buildSite = function(siteID) {
+  var buildPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
+  var sitePath = exports.siteById(siteID).filePath;
+
+  if ( buildPath != undefined ) {
+    buildPath = buildPath.replace(/["']/g, "");
+    jekyllController.buildSite(sitePath, buildPath);
+  };
+}
+
+exports.removeSite = function(siteID) {
+    var site = exports.siteById(siteID);
+    sitesList.splice(sitesList.indexOf(site), 1);
+}
+
 exports.stopAllServers = function(id) {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].serverActive) {

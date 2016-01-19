@@ -25,8 +25,11 @@ var Site = React.createClass({
     shell.openItem(this.props.siteInfo.filePath);
   },
   removeSiteFromList: function() {
+    Dispatcher.send('removeSiteFromList', this.props.siteInfo.id);
   },
   buildSite: function() {
+    Dispatcher.send('buildSite', this.props.siteInfo.id);
+    this.toggleOptionsPanel();
   },
   render: function () {
     var siteInfo = this.props.siteInfo;

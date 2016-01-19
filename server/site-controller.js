@@ -29,3 +29,16 @@ exports.stopServerOnSite = function(sender, siteID) {
 
   sitesStore.sendSitesList(sender);
 }
+
+exports.removeSite = function (sender, siteID) {
+  var site = sitesStore.siteById(siteID);
+  if (site.server) { exports.stopServerOnSite(sender, siteID)}
+  sitesStore.removeSite(siteID);
+
+  sitesStore.sendSitesList(sender);
+}
+
+exports.buildSite = function (sender, siteID) {
+  sitesStore.buildSite(siteID);
+  sitesStore.sendSitesList(sender);
+}

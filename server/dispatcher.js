@@ -27,6 +27,14 @@ ipcMain.on('stopServer', function(event, siteId) {
   siteController.stopServerOnSite(event.sender, siteId);
 });
 
+ipcMain.on('removeSiteFromList', function(event, siteId) {
+  siteController.removeSite(event.sender, siteId);
+});
+
+ipcMain.on('buildSite', function(event, siteId) {
+  siteController.buildSite(event.sender, siteId);
+});
+
 exports.report = function(message){
   if ( reporter ) reporter.send('report', message);
 }

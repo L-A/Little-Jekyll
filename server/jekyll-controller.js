@@ -1,7 +1,7 @@
 import { ipcMain } from 'electron';
 import childProcess from 'child_process';
-import sitesStore from './sites-store.js';
-import siteController from './site-controller.js';
+import sitesStore from './sites-store';
+import siteController from './site-controller';
 import path from 'path';
 
 var jekyllDist = require('electron').app.getAppPath() + '/jekyll/jekyll';
@@ -27,16 +27,22 @@ exports.newServer = function(requester, id, path) {
 }
 
 exports.createNewSite = function(requester, dir) {
-
   var creatorProcess = childProcess.spawn(jekyllDist, ["new", dir]);
-
   creatorProcess.stdout.on('data',
     function (data) {
       sitesStore.addSite(requester, dir);
     }
   );
-
   creatorProcess.stderr.on('data',
+    function (data) {
+      console.log("Creator error: " + data);
+    }
+  );
+}
+
+exports.buildSite = function(sourcePath, buildPath) {
+  var buildProcess = childProcess.spawn(jekyllDist, ["build", "--source", sourcePath, "--destination", buildPath]);
+  buildProcess.stderr.on('data',
     function (data) {
       console.log("Creator error: " + data);
     }
