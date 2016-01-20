@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dispatcher from '../utils/front-end-dispatcher';
+import SimpleButton from './simple-button.js';
 import shell from 'shell';
 
 var Site = React.createClass({
@@ -45,11 +46,11 @@ var Site = React.createClass({
           </a>
           <div className="site-info">
             <h1 className={siteInfo.serverActive ? 'server-active' : ''}>{siteInfo.name}</h1>
-            <p className="site-folder" onClick={this.openFolder}>{siteInfo.filePath}</p>
+            <SimpleButton className="site-folder" onClick={this.openFolder} textContent={siteInfo.filePath} hintText="This is the inherited hint"/>
           </div>
           <div className="site-options">
             <a className={siteInfo.serverActive ? 'btn-preview available' : 'btn-preview'} onClick={this.openLocalServer}></a>
-            <a className="btn-edit" onClick={this.toggleOptionsPanel}></a>
+            <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Open the options panel"/>
           </div>
         </div>
         <div className="secondary-panel">
