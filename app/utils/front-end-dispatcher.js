@@ -2,7 +2,6 @@ import {ipcRenderer} from 'electron';
 
 var dispatcher = {
   send: function(message, content) {
-    console.log("sending " + message);
     content = content || null;
     if (content == null) {
       ipcRenderer.send(message);
