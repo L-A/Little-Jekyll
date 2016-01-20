@@ -13,6 +13,7 @@ var OptionsBar = React.createClass({
       <div className="options-bar">
         <a href="#" onClick={this.createNewSite} className="btn-create"></a>
         <a href="#" onClick={this.requestNewSite} className="btn-open"></a>
+        <span className="hint-text">{this.props.hintText}</span>
         <a href="#" className="btn-settings"></a>
       </div>
     );

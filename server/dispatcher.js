@@ -35,6 +35,14 @@ ipcMain.on('buildSite', function(event, siteId) {
   siteController.buildSite(event.sender, siteId);
 });
 
+ipcMain.on('hint', function(event, hintText) {
+  event.sender.send('hint', hintText); // I dub this the lol roundtrip
+});
+
+ipcMain.on('endHint', function(event) {
+  event.sender.send('hint');
+});
+
 exports.report = function(message){
   if ( reporter ) reporter.send('report', message);
 }
