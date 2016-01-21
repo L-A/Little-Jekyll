@@ -85,11 +85,11 @@ $options-panel-width: 150px;
           transition: color $timing-snappy linear, background-color $timing-snappy linear;
 
           &:hover {
-            background: lighten($boring-gray, 10%);
+            background: darken($boring-gray, 10%);
           }
 
           &:active {
-            background: lighten($boring-gray, 15%);
+            background: darken($boring-gray, 15%);
           }
         }
 
@@ -112,7 +112,7 @@ $options-panel-width: 150px;
             opacity: 1;
             width: 18px;
 
-            &:hover { opacity: 0.7; }
+            &:hover { background: darken($primary-color, 10%); }
             &:active { opacity: 0.8; }
           }
         }
@@ -218,11 +218,11 @@ $options-panel-width: 150px;
         margin-right: 13px;
 
         &:hover {
-          background: darken($options-bg-color, 10%);
+          background: darken($options-bg-color, 30%);
         }
 
         &:active {
-          background: darken($options-bg-color, 30%);
+          background: darken($options-bg-color, 25%);
         }
       }
 

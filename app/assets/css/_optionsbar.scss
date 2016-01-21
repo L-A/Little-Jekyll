@@ -22,7 +22,7 @@
     width: 24px;
 
       &:hover { background: lighten($options-bg-color, 30%); }
-      &:active { background: lighten($options-bg-color, 20%); }
+      &:active { background: lighten($options-bg-color, 25%); }
     }
 
     .hint-text {
