@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dispatcher from '../utils/front-end-dispatcher';
+import SimpleButton from './simple-button'
 
 var OptionsBar = React.createClass({
   requestNewSite: function() {
@@ -11,10 +12,10 @@ var OptionsBar = React.createClass({
   render: function () {
     return (
       <div className="options-bar">
-        <a href="#" onClick={this.createNewSite} className="btn-create"></a>
-        <a href="#" onClick={this.requestNewSite} className="btn-open"></a>
-        <span className="hint-text">{this.props.hintText}</span>
-        <a href="#" className="btn-settings"></a>
+        <SimpleButton onClick={this.createNewSite} className="btn-create" hintText="Create new site in..." />
+        <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open" hintText="Open existing site..." />
+        <span className={this.props.hintAvailable ? "hint-text hint-available" : "hint-text"}>{this.props.hintText}</span>
+        <SimpleButton className="btn-settings" />
       </div>
     );
   }

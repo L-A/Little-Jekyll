@@ -39,24 +39,24 @@ var Site = React.createClass({
     return (
       <li className={cellClass}>
         <div className="main-panel">
-          <a className={switchState} onClick={this.toggleServerState}>
+          <SimpleButton className={switchState} onClick={this.toggleServerState} hintText="Start and stop this server">
             <div className="groove">
               <div className="knob"></div>
             </div>
-          </a>
+          </SimpleButton>
           <div className="site-info">
             <h1 className={siteInfo.serverActive ? 'server-active' : ''}>{siteInfo.name}</h1>
-            <SimpleButton className="site-folder" onClick={this.openFolder} textContent={siteInfo.filePath} hintText="This is the inherited hint"/>
+            <SimpleButton className="site-folder" onClick={this.openFolder} textContent={siteInfo.filePath} hintText="Open site's folder"/>
           </div>
           <div className="site-options">
-            <a className={siteInfo.serverActive ? 'btn-preview available' : 'btn-preview'} onClick={this.openLocalServer}></a>
-            <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Open the options panel"/>
+            <SimpleButton className={siteInfo.serverActive ? 'btn-preview available' : 'btn-preview'} onClick={this.openLocalServer} hintText="Open in browser"/>
+            <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Toggle the options panel"/>
           </div>
         </div>
         <div className="secondary-panel">
-          <a className="btn-remove" onClick={this.removeSiteFromList}></a>
-          <a className="btn-build" onClick={this.buildSite}></a>
-          <a className="btn-edit" onClick={this.toggleOptionsPanel}></a>
+          <SimpleButton className="btn-remove" onClick={this.removeSiteFromList} hintText="Remove site from list"/>
+          <SimpleButton className="btn-build" onClick={this.buildSite} hintText="Build site to..."/>
+          <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Toggle the options panel"/>
         </div>
       </li>
     );

@@ -18,6 +18,7 @@ var SimpleButton = React.createClass({
          onMouseOver={this.props.hintText ? this.reportHover : null}
          onMouseLeave={this.endHover}>
         {this.props.textContent || ""}
+        {this.props.children}
       </a>
     );
   }
