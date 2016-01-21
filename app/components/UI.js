@@ -9,18 +9,22 @@ import Dispatcher from '../utils/front-end-dispatcher';
 var UI = React.createClass({
   getInitialState: function() {
     Dispatcher.createCallback('hint', this.handleChildHover);
-    return {hintText: 'Howdy!'};
+    Dispatcher.createCallback('endHint', this.endChildHover);
+    return {hintText: '', hintAvailable: false};
   },
   handleChildHover: function(event, hintText) {
     if (hintText == undefined) { hintText = "" };
-    this.setState({hintText: hintText});
+    this.setState({hintText: hintText, hintAvailable: true});
+  },
+  endChildHover: function () {
+    this.setState({hintAvailable: false});
   },
   render: function() {
     return (
       <div className="ui-root">
         <TitleBar />
         <SitesList />
-        <OptionsBar hintText={this.state.hintText} />
+        <OptionsBar hintText={this.state.hintText} hintAvailable={this.state.hintAvailable} />
       </div>
     );
   }

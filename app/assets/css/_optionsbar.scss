@@ -27,10 +27,19 @@
 
     .hint-text {
       align-self: center;
+      color: lighten($options-bg-color, 30%);
+      opacity: 0;
       text-align: center;
       flex: 1 0 auto;
+      font-weight: 300;
+      font-size: 11px;
+      transition: opacity $timing-snappy linear;
+      transition-delay: 350ms;
 
-      font-size: 12px;
+      &.hint-available {
+        opacity: 1;
+        transition: opacity $timing-snappy-btn linear;
+      }
     }
 
   .btn-create {

@@ -40,7 +40,7 @@ ipcMain.on('hint', function(event, hintText) {
 });
 
 ipcMain.on('endHint', function(event) {
-  event.sender.send('hint');
+  event.sender.send('endHint');
 });
 
 exports.report = function(message){
