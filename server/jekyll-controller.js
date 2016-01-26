@@ -8,23 +8,27 @@ import path from 'path';
 var jekyllDist = path.join(require('electron').app.getAppPath(), "jekyll", "jekyll");
 var usedPorts = []; // Will fill with active servers' used ports
 
-exports.newServer = function(requester, id, path) {
-  var port = firstAvailablePort();
+exports.newServer = function(requester, id, dir) {
   var server = {
     siteID : id,
-    localPath: path,
+    localPath: dir,
     reportTo : requester,
-    process : (startServer(path, port)),
-    bsProcess : browsersync.create(),
-    port : port,
+    jekyllProcess : undefined,
+    browserSyncProcess : browsersync.create(),
     localURL : undefined
   };
-
-  server.process.stdout.on('data',
-    function (data) {
-      serverUpdate(server, data);
-    }
-  );
+  var filePath = path.join(dir, "_site");
+  server.browserSyncProcess.init({
+    server: filePath,
+    files: filePath,
+    notify: false,
+    ui: false,
+    open: false
+  }, function(err, bs) {
+    server.jekyllProcess = startServer(dir);
+    server.localURL = bs.options.getIn(["urls", "local"]);
+    siteController.reportRunningServerOnSite(server.reportTo, server.siteID);
+  });
 
   return server;
 }
@@ -52,99 +56,17 @@ exports.buildSite = function(sourcePath, buildPath) {
   );
 }
 
-var updateHandlers = [
-  {
-    str: "Configuration file:",
-    handler: function (server, data) {
-      // Unused, maybe check if _config.yml is always under site root
-      // var path = data.match("(/.*\.yml)");
-    }
-  },
-  {
-    str: "Generating...",
-    handler: function (server, data) {
-      // Unused
-    }
-  },
-  {
-    str: "Source: ",
-    handler: function (server, data) {
-      // Unused
-    }
-  },
-  {
-    str: "running...",
-    handler: function (server, data) {
-      siteController.reportRunningServerOnSite(server.reportTo, server.siteID);
-    }
-  },
-  {
-    str: "done in ",
-    handler: function (server, data) {
-      // Unused
-      // var duration = data.match("(?:\d*\.)?\d+");
-    }
-  },
-  {
-    str: "Auto-regeneration:",
-    handler: function (server, data) {
-      // Unused
-      // var autoregen = ( data.match("(enabled)") >= 0 );
-    }
-  },
-  {
-    str: "Server address:",
-    handler: function (server, data) {
-      var url = data.match("(http.*/)");
-      server.localURL = url[url.length-1];
-      sitesStore.sendSitesList(server.reportTo);
-      server.bsProcess.init({
-        files: path.join(server.localPath, "_site"),
-        proxy: server.localURL,
-        notify: false,
-        ui: false
-      })
-    }
-  }
-];
+var startServer = function(dir) {
+  var destinationDir = path.join(dir, "_site"); // Needed, otherwise Jekyll may try writing to fs root
+  var cmdLineArgs = ["build", "--source", dir, "--destination", destinationDir, "--watch"];
 
-var startServer = function(dir, port) {
-  // dir = dir.replace(/ /g, "\\ ");
-  var destinationDir = path.join(dir, "_site"); // Needed, otherwise Jekyll servers may try writing to fs root
-  var cmdLineArgs = ["serve", "--source", dir, "--destination", destinationDir, "--port", port];
-
-  var serverProcess = childProcess.spawn(jekyllDist, cmdLineArgs);
-
-  return serverProcess;
-}
-
-var serverUpdate = function(server, data) {
-  data = data.toString();
-  for (var i = 0; i < updateHandlers.length; i++) {
-    if (data.search(updateHandlers[i].str) != -1) {
-      updateHandlers[i].handler(server, data);
-     }
-  }
-  console.log("no match: " + data);
-}
-
-var firstAvailablePort = function () {
-  var port = 4000;
-
-  for(var i = 0; i < usedPorts.length; i++) {
-    if (port == usedPorts[i]) port++;
-  }
-
-  usedPorts.push(port);
-
-  return port;
+  return childProcess.spawn(jekyllDist, cmdLineArgs)
 }
 
 exports.stopServer = function(server) {
   for(var i = 0; i < usedPorts.length; i++) {
     if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
   }
-
-  server.bsProcess.exit();
-  server.process.kill();
+  server.browserSyncProcess.exit();
+  server.jekyllProcess.kill();
 }
