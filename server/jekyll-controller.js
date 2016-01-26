@@ -5,7 +5,7 @@ import sitesStore from './sites-store';
 import siteController from './site-controller';
 import path from 'path';
 
-var jekyllDist = require('electron').app.getAppPath() + '/jekyll/jekyll';
+var jekyllDist = path.join(require('electron').app.getAppPath(), "jekyll", "jekyll");
 var usedPorts = []; // Will fill with active servers' used ports
 
 exports.newServer = function(requester, id, path) {
