@@ -12,10 +12,10 @@ var OptionsBar = React.createClass({
   render: function () {
     return (
       <div className="options-bar">
-        <SimpleButton onClick={this.createNewSite} className="btn-create" hintText="Create new site in..." />
-        <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open" hintText="Open existing site..." />
+        <SimpleButton onClick={this.createNewSite} className="btn-create" hintText="Create a new template site" />
         <span className={this.props.hintAvailable ? "hint-text hint-available" : "hint-text"}>{this.props.hintText}</span>
-        <SimpleButton className="btn-settings" />
+        <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open" hintText="Open an existing Jekyll site" />
+        {/* <SimpleButton className="btn-settings" /> */}
       </div>
     );
   }
