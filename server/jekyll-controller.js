@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 import childProcess from 'child_process';
+import browsersync from 'browser-sync';
 import sitesStore from './sites-store';
 import siteController from './site-controller';
 import path from 'path';
@@ -11,8 +12,10 @@ exports.newServer = function(requester, id, path) {
   var port = firstAvailablePort();
   var server = {
     siteID : id,
+    localPath: path,
     reportTo : requester,
     process : (startServer(path, port)),
+    bsProcess : browsersync.create(),
     port : port,
     localURL : undefined
   };
@@ -95,6 +98,12 @@ var updateHandlers = [
       var url = data.match("(http.*/)");
       server.localURL = url[url.length-1];
       sitesStore.sendSitesList(server.reportTo);
+      server.bsProcess.init({
+        files: path.join(server.localPath, "_site"),
+        proxy: server.localURL,
+        notify: false,
+        ui: false
+      })
     }
   }
 ];
@@ -136,5 +145,6 @@ exports.stopServer = function(server) {
     if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
   }
 
+  server.bsProcess.exit();
   server.process.kill();
 }
