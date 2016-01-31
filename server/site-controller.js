@@ -5,16 +5,25 @@ exports.startServerOnSite = function(sender, siteID) {
   var site = sitesStore.siteById(siteID);
   var newServer = jekyllController.newServer(sender, site.id, site.filePath);
 
-  sitesStore.setSiteProperty(siteID, 'serverRequested', true);
+  sitesStore.setSiteProperty(siteID, 'serverWorking', true);
   sitesStore.setSiteProperty(siteID, 'server', newServer);
 
   sitesStore.sendSitesList(sender);
 }
 
 exports.reportRunningServerOnSite = function(sender, siteID) {
-  sitesStore.setSiteProperty(siteID, 'serverRequested', false);
   sitesStore.setSiteProperty(siteID, 'serverActive', true);
 
+  sitesStore.sendSitesList(sender);
+}
+
+exports.reportWorkingServerOnSite = function(sender, siteID) {
+  sitesStore.setSiteProperty(siteID, 'serverWorking', true);
+  sitesStore.sendSitesList(sender);
+}
+
+exports.reportAvailableServerOnSite = function(sender, siteID) {
+  sitesStore.setSiteProperty(siteID, 'serverWorking', false);
   sitesStore.sendSitesList(sender);
 }
 

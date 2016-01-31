@@ -36,7 +36,7 @@ var createStorableList = function (sitesList) {
       storableList[i][prop] = sitesList[i][prop];
 
       // stores whether to start a server on the next app load
-      storableList[i].serverRequested = sitesList[i].serverActive;
+      storableList[i].serverWorking = sitesList[i].serverActive;
     }
   }
   return JSON.stringify(storableList);

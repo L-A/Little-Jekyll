@@ -9,7 +9,7 @@ var Site = React.createClass({
   },
   toggleServerState: function() {
     var message = this.props.siteInfo.serverActive ? 'stopServer' : 'startServer';
-    if( !this.props.siteInfo.serverRequested ) {
+    if( !this.props.siteInfo.serverWorking ) {
       Dispatcher.send(message, this.props.siteInfo.id);
     }
   },
@@ -35,7 +35,7 @@ var Site = React.createClass({
   render: function () {
     var siteInfo = this.props.siteInfo;
     var cellClass = this.state.optionsShown ? "site-cell options-shown" : "site-cell";
-    var switchState = 'site-serve-switch ' + (siteInfo.serverActive ? 'switch-on' : (siteInfo.serverRequested ? 'switch-working' : 'switch-off'));
+    var switchState = 'site-serve-switch ' + (siteInfo.serverWorking ? 'switch-working' : (siteInfo.serverActive ? 'switch-on' : 'switch-off'));
     return (
       <li className={cellClass}>
         <div className="main-panel">

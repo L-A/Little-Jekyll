@@ -13,7 +13,7 @@ var initSitesList = function(sitesData, sender) {
   if(sitesData) {
     sitesList = sitesData;
     for (var i = 0; i < sitesList.length; i++) {
-      if (sitesList[i].serverRequested) {
+      if (sitesList[i].serverWorking) {
         siteController.startServerOnSite(sender, sitesList[i].id);
       }
     }
@@ -58,7 +58,7 @@ exports.addSite = function(sender, filePaths) {
         name: automaticName,
         filePath: filePath,
         serverActive: false,
-        serverRequested: false,
+        serverWorking: false,
         server: null
       });
     }
