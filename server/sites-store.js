@@ -45,13 +45,13 @@ exports.sendSitesList = function(sender) {
 }
 
 exports.addSite = function(sender, filePaths) {
-  var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory' ]});
+  var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory', 'multiSelections' ]});
 
   if ( filePaths != undefined ) {
     for (var i = 0; i < filePaths.length; i++) {
       var filePath = filePaths[i];
       var automaticName = filePath.slice(filePath.lastIndexOf("/") + 1);
-      var id = new Date().valueOf(); // I am an expert at unique IDs
+      var id = new Date().valueOf() + i; // I am an expert at unique IDs
 
       sitesList.push({
         id: id,
