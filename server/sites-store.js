@@ -2,7 +2,7 @@ import fs from 'fs';
 import dialog from 'dialog';
 import dispatcher from './dispatcher';
 import siteController from './site-controller';
-import jekyllController from './jekyll-controller';
+import processController from './process-controller';
 import storage from './storage';
 
 var sitesList = [];
@@ -73,7 +73,7 @@ exports.createSite = function(sender) {
   if ( folderPath != undefined ) {
     folderPath = folderPath.replace(/["']/g, "");
     fs.mkdir(folderPath);
-    jekyllController.createNewSite(sender, folderPath);
+    processController.createNewSite(sender, folderPath);
   };
 }
 
@@ -83,7 +83,7 @@ exports.buildSite = function(siteID) {
 
   if ( buildPath != undefined ) {
     buildPath = buildPath.replace(/["']/g, "");
-    jekyllController.buildSite(sitePath, buildPath);
+    processController.buildSite(sitePath, buildPath);
   };
 }
 

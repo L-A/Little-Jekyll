@@ -1,9 +1,9 @@
 import sitesStore from './sites-store.js';
-import jekyllController from './jekyll-controller.js';
+import processController from './process-controller.js';
 
 exports.startServerOnSite = function(sender, siteID) {
   var site = sitesStore.siteById(siteID);
-  var newServer = jekyllController.newServer(sender, site.id, site.filePath);
+  var newServer = processController.newServer(sender, site.id, site.filePath);
 
   sitesStore.setSiteProperty(siteID, 'serverWorking', true);
   sitesStore.setSiteProperty(siteID, 'server', newServer);
@@ -31,7 +31,7 @@ exports.stopServerOnSite = function(sender, siteID) {
   var server = sitesStore.siteById(siteID).server;
 
   if (server) {
-    jekyllController.stopServer(server);
+    processController.stopServer(server);
     sitesStore.setSiteProperty(siteID, 'serverActive', false);
     sitesStore.setSiteProperty(siteID, 'server', undefined);
   }
