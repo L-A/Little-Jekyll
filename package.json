@@ -35,7 +35,7 @@
       }
     },
     "package": {
-      "command": "node package.js",
+      "command": "node package.js -i 'app/appicon' -n 'Little Jekyll'",
       "env": {
         "NODE_ENV": "production"
       }
