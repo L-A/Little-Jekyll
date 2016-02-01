@@ -1,6 +1,6 @@
 import fs from 'fs';
 import dialog from 'dialog';
-import dispatcher from './dispatcher';
+import Dispatcher from './dispatcher';
 import siteController from './site-controller';
 import processController from './process-controller';
 import storage from './storage';
@@ -95,7 +95,7 @@ exports.removeSite = function(siteID) {
 exports.stopAllServers = function(id) {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].serverActive) {
-      siteController.stopServerOnSite(dispatcher.reporter, sitesList[i].id);
+      siteController.stopServerOnSite(Dispatcher.reporter, sitesList[i].id);
     }
   }
 }
