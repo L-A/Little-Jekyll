@@ -44,6 +44,7 @@ ipcMain.on('endHint', function(event) {
 });
 
 exports.report = function(message){
+  console.log(message);
   if ( reporter ) reporter.send('report', message);
 }
 
