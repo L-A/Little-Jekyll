@@ -65,9 +65,9 @@ var initMainWindow = function () {
     mainWindow = null;
   });
 
-  if (process.env.NODE_ENV === 'development') {
+  // if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
-  }
+  // }
 
   if (process.platform === 'darwin') {
     template = [{
