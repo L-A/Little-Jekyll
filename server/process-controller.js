@@ -39,6 +39,18 @@ module.exports.newServer = function(requester, id, dir) {
         serverUpdate(server, data);
       }
     )
+
+    server.jekyllProcess.stderr.on('data',
+      function (data) {
+        Dispatcher.report("Process error:" + data);
+      }
+    )
+
+    server.jekyllProcess.on('error',
+      function (data) {
+        Dispatcher.report("Spawn error:" + data);
+      }
+    )
   });
 
   return server;
