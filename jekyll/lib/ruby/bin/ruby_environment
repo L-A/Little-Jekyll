@@ -11,9 +11,9 @@ echo ORIG_RUBYLIB=\"$RUBYLIB\"
 
 echo TERMINFO=/usr/share/terminfo
 echo SSL_CERT_FILE=\"$ROOT/lib/ca-bundle.crt\"
-echo RUBYOPT=\"-r$ROOT/lib/restore_environment\"
-echo GEM_HOME="$ROOT/lib/ruby/gems/2.2.0"
-echo GEM_PATH="$ROOT/lib/ruby/gems/2.2.0"
+echo RUBYOPT="-rrestore_environment"
+echo GEM_HOME=\"$ROOT/lib/ruby/gems/2.2.0\"
+echo GEM_PATH=\"$ROOT/lib/ruby/gems/2.2.0\"
 echo RUBYLIB=\"$ROOT/lib/ruby/site_ruby/2.2.0:$ROOT/lib/ruby/site_ruby/2.2.0/x86_64-darwin13:$ROOT/lib/ruby/site_ruby:$ROOT/lib/ruby/vendor_ruby/2.2.0:$ROOT/lib/ruby/vendor_ruby/2.2.0/x86_64-darwin13:$ROOT/lib/ruby/vendor_ruby:$ROOT/lib/ruby/2.2.0:$ROOT/lib/ruby/2.2.0/x86_64-darwin13\"
 
 echo export ORIG_DYLD_LIBRARY_PATH
