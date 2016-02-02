@@ -3,6 +3,7 @@ import childProcess from 'child_process';
 import sitesStore from './sites-store';
 import siteController from './site-controller';
 import browsersync from 'browser-sync';
+import Dispatcher from './dispatcher';
 import path from 'path';
 
 var jekyllDist = path.join(require('electron').app.getAppPath(), "jekyll", "jekyll");
@@ -52,7 +53,7 @@ module.exports.createNewSite = function(requester, dir) {
   );
   creatorProcess.stderr.on('data',
     function (data) {
-      console.log("Creator error: " + data);
+      Dispatcher.report("Creator error: " + data);
     }
   );
 }

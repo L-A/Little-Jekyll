@@ -3,6 +3,12 @@ import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
 var reporter = null;
 
+// The best thing for testing packaged apps
+module.exports.report = function(message){
+  console.log(message);
+  if ( reporter ) reporter.send('report', message);
+}
+
 ipcMain.on('hello', function(event) {
   reporter = event.sender;
 })
@@ -42,11 +48,6 @@ ipcMain.on('hint', function(event, hintText) {
 ipcMain.on('endHint', function(event) {
   event.sender.send('endHint');
 });
-
-exports.report = function(message){
-  console.log(message);
-  if ( reporter ) reporter.send('report', message);
-}
 
 module.exports.reporter = reporter;
 
