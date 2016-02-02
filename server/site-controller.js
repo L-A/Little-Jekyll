@@ -1,7 +1,7 @@
 import sitesStore from './sites-store.js';
 import processController from './process-controller.js';
 
-exports.startServerOnSite = function(sender, siteID) {
+module.exports.startServerOnSite = function(sender, siteID) {
   var site = sitesStore.siteById(siteID);
   var newServer = processController.newServer(sender, site.id, site.filePath);
 
@@ -11,23 +11,23 @@ exports.startServerOnSite = function(sender, siteID) {
   sitesStore.sendSitesList(sender);
 }
 
-exports.reportRunningServerOnSite = function(sender, siteID) {
+module.exports.reportRunningServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverActive', true);
 
   sitesStore.sendSitesList(sender);
 }
 
-exports.reportWorkingServerOnSite = function(sender, siteID) {
+module.exports.reportWorkingServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverWorking', true);
   sitesStore.sendSitesList(sender);
 }
 
-exports.reportAvailableServerOnSite = function(sender, siteID) {
+module.exports.reportAvailableServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverWorking', false);
   sitesStore.sendSitesList(sender);
 }
 
-exports.stopServerOnSite = function(sender, siteID) {
+module.exports.stopServerOnSite = function(sender, siteID) {
   var server = sitesStore.siteById(siteID).server;
 
   if (server) {
@@ -39,15 +39,15 @@ exports.stopServerOnSite = function(sender, siteID) {
   sitesStore.sendSitesList(sender);
 }
 
-exports.removeSite = function (sender, siteID) {
+module.exports.removeSite = function (sender, siteID) {
   var site = sitesStore.siteById(siteID);
-  if (site.server) { exports.stopServerOnSite(sender, siteID)}
+  if (site.server) { module.exports.stopServerOnSite(sender, siteID)}
   sitesStore.removeSite(siteID);
 
   sitesStore.sendSitesList(sender);
 }
 
-exports.buildSite = function (sender, siteID) {
+module.exports.buildSite = function (sender, siteID) {
   sitesStore.buildSite(siteID);
   sitesStore.sendSitesList(sender);
 }

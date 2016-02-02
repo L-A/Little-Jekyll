@@ -7,7 +7,7 @@ var appDataIsBeingWritten = false;
 
 var storableProperties = ["filePath", "id", "name"];
 
-exports.attemptToOpenSitesList = function (callback, sender) {
+module.exports.attemptToOpenSitesList = function (callback, sender) {
   fs.readFile(appDataPath, 'utf8', function (err, data) {
     if (err) {
       return false;
@@ -17,7 +17,7 @@ exports.attemptToOpenSitesList = function (callback, sender) {
   });
 }
 
-exports.updateSitesList = function (sitesList) {
+module.exports.updateSitesList = function (sitesList) {
   var sitesListString = createStorableList(sitesList);
   if (!appDataIsBeingWritten) {
     appDataIsBeingWritten = true;

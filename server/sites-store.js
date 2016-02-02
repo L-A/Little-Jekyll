@@ -17,11 +17,11 @@ var initSitesList = function(sitesData, sender) {
         siteController.startServerOnSite(sender, sitesList[i].id);
       }
     }
-    exports.sendSitesList(sender);
+    module.exports.sendSitesList(sender);
   }
 }
 
-exports.siteById = function(id) {
+module.exports.siteById = function(id) {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].id === id) {
       return sitesList[i];
@@ -29,12 +29,12 @@ exports.siteById = function(id) {
   }
 }
 
-exports.setSiteProperty = function(id, property, value) {
-  var site = exports.siteById(id);
+module.exports.setSiteProperty = function(id, property, value) {
+  var site = module.exports.siteById(id);
   site[property] = value;
 }
 
-exports.sendSitesList = function(sender) {
+module.exports.sendSitesList = function(sender) {
   if (initialGetSitesList) {
     storage.attemptToOpenSitesList(initSitesList, sender);
     initialGetSitesList = false;
@@ -44,7 +44,7 @@ exports.sendSitesList = function(sender) {
   }
 }
 
-exports.addSite = function(sender, filePaths) {
+module.exports.addSite = function(sender, filePaths) {
   var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory', 'multiSelections' ]});
 
   if ( filePaths != undefined ) {
@@ -63,11 +63,11 @@ exports.addSite = function(sender, filePaths) {
       });
     }
 
-    exports.sendSitesList(sender);
+    module.exports.sendSitesList(sender);
   }
 }
 
-exports.createSite = function(sender) {
+module.exports.createSite = function(sender) {
   var folderPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
 
   if ( folderPath != undefined ) {
@@ -77,9 +77,9 @@ exports.createSite = function(sender) {
   };
 }
 
-exports.buildSite = function(siteID) {
+module.exports.buildSite = function(siteID) {
   var buildPath = dialog.showSaveDialog({ properties: [ 'openDirectory' ]});
-  var sitePath = exports.siteById(siteID).filePath;
+  var sitePath = module.exports.siteById(siteID).filePath;
 
   if ( buildPath != undefined ) {
     buildPath = buildPath.replace(/["']/g, "");
@@ -87,12 +87,12 @@ exports.buildSite = function(siteID) {
   };
 }
 
-exports.removeSite = function(siteID) {
-    var site = exports.siteById(siteID);
+module.exports.removeSite = function(siteID) {
+    var site = module.exports.siteById(siteID);
     sitesList.splice(sitesList.indexOf(site), 1);
 }
 
-exports.stopAllServers = function(id) {
+module.exports.stopAllServers = function(id) {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].serverActive) {
       siteController.stopServerOnSite(Dispatcher.reporter, sitesList[i].id);

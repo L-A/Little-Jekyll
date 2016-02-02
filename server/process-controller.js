@@ -8,7 +8,7 @@ import path from 'path';
 var jekyllDist = path.join(require('electron').app.getAppPath(), "jekyll", "jekyll");
 var usedPorts = []; // Will fill with active servers' used ports (BrowserSync has trouble with two simultaneous inits)
 
-exports.newServer = function(requester, id, dir) {
+module.exports.newServer = function(requester, id, dir) {
   var server = {
     siteID: id,
     localPath: dir,
@@ -43,7 +43,7 @@ exports.newServer = function(requester, id, dir) {
   return server;
 }
 
-exports.createNewSite = function(requester, dir) {
+module.exports.createNewSite = function(requester, dir) {
   var creatorProcess = childProcess.spawn(jekyllDist, ["new", dir]);
   creatorProcess.stdout.on('data',
     function (data) {
@@ -57,7 +57,7 @@ exports.createNewSite = function(requester, dir) {
   );
 }
 
-exports.buildSite = function(sourcePath, buildPath) {
+module.exports.buildSite = function(sourcePath, buildPath) {
   var buildProcess = childProcess.spawn(jekyllDist, ["build", "--source", sourcePath, "--destination", buildPath]);
   buildProcess.stderr.on('data',
     function (data) {
@@ -73,7 +73,7 @@ var startServer = function(dir) {
   return childProcess.spawn(jekyllDist, cmdLineArgs)
 }
 
-exports.stopServer = function(server) {
+module.exports.stopServer = function(server) {
   for(var i = 0; i < usedPorts.length; i++) {
     if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
   }

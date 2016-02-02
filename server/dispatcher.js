@@ -48,9 +48,9 @@ exports.report = function(message){
   if ( reporter ) reporter.send('report', message);
 }
 
-exports.reporter = reporter;
+module.exports.reporter = reporter;
 
-exports.handleWillQuit = function() {
+module.exports.handleWillQuit = function() {
   sitesStore.sendSitesList(reporter);
   sitesStore.stopAllServers();
 }
