@@ -53,7 +53,7 @@ module.exports.addSite = function(sender, filePaths) {
       var automaticName = filePath.slice(filePath.lastIndexOf("/") + 1);
       var id = new Date().valueOf() + i; // I am an expert at unique IDs
 
-      sitesList.push({
+      sitesList.unshift({
         id: id,
         name: automaticName,
         filePath: filePath,
