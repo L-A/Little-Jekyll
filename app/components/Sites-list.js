@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Site from './Site';
 import Dispatcher from '../utils/front-end-dispatcher';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 var SitesList = React.createClass({
   getInitialState: function() {
@@ -20,9 +21,9 @@ var SitesList = React.createClass({
         );
     });
     return(
-      <ul className="sites-list">
+      <ReactCSSTransitionGroup component="ul" className="sites-list" transitionName="slide" transitionEnterTimeout={400} transitionLeaveTimeout={500}>
         {siteNodes}
-      </ul>
+      </ReactCSSTransitionGroup>
     )
   }
 })
