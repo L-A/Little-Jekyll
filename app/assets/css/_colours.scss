@@ -1,7 +1,10 @@
 $primary-text-color: #64656a;
-$primary-color: #5b6ec7;
+$primary-color: #3333e8;
 
 $light-color: #e9eaf3;
 $switch-bg: #f1f1f1;
 $boring-gray: #afb0b5;
-$options-bg-color: #545976;
+$options-bg-color: #4747aa;
+
+$options-gradient: linear-gradient(to bottom, $options-bg-color, darken($options-bg-color, 10));
+$knob-gradient: linear-gradient(to bottom, lighten($primary-color, 4), $primary-color);

@@ -163,7 +163,7 @@ $options-panel-width: 150px;
           background-color: $switch-bg;
 
          .knob {
-            background-color: $primary-color;
+            background: $knob-gradient;
             margin-top: 0;
           }
         }

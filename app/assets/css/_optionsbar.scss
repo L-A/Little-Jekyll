@@ -1,10 +1,12 @@
 .options-bar {
+  border: solid 1px $options-bg-color;
   display: flex;
   flex: 0 0 $options-bar-height;
   flex-direction: row;
   align-self: flex-end;
 
-  background-color: $options-bg-color;
+  //background-color: $options-bg-color;
+  background-image: $options-gradient;
   color: $light-color;
   position: relative;
   height: $options-bar-height;
