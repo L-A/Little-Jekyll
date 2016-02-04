@@ -52,7 +52,9 @@ var initMainWindow = function () {
   mainWindow = new BrowserWindow({
     frame: false,
     width: 340,
-    height: 260
+    height: 260,
+    minWidth: 340,
+    minHeight: 230
   });
 
   if (process.env.HOT) {
