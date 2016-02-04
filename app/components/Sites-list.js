@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Site from './Site';
 import Dispatcher from '../utils/front-end-dispatcher';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { VelocityElement, VelocityTransitionGroup } from 'velocity-react';
 
 var SitesList = React.createClass({
   getInitialState: function() {
@@ -21,9 +21,9 @@ var SitesList = React.createClass({
         );
     });
     return(
-      <ReactCSSTransitionGroup component="ul" className="sites-list" transitionName="slide" transitionEnterTimeout={400} transitionLeaveTimeout={500}>
+      <VelocityTransitionGroup component="ul" className="sites-list" enter={{animation: "slideDown", stagger:25, duration: 300, easing: "easeInOutQuart"}} leave={{animation: "slideUp", easing: "easeInOutQuart", duration: 450, delay:175}}>
         {siteNodes}
-      </ReactCSSTransitionGroup>
+      </VelocityTransitionGroup>
     )
   }
 })
