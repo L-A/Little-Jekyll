@@ -48,6 +48,14 @@ module.exports.addSite = function(sender, filePaths) {
   var filePaths = (typeof filePaths === "string" ? [filePaths] : filePaths) || dialog.showOpenDialog({ properties: [ 'openDirectory', 'multiSelections' ]});
 
   if ( filePaths != undefined ) {
+    for ( var i = (filePaths.length - 1); i >= 0 ; i-- ) {
+      for ( var j = 0; j < sitesList.length; j++ ) {
+        if(filePaths[i] == sitesList[j].filePath) {
+          filePaths.splice(i, 1);
+        }
+      }
+    }
+
     for (var i = 0; i < filePaths.length; i++) {
       var filePath = filePaths[i];
       var automaticName = filePath.slice(filePath.lastIndexOf("/") + 1);
