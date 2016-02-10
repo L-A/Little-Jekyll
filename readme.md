@@ -2,7 +2,7 @@
 
 A desktop app to manage Jekyll websites, overview and control your Jekyll processes.
 
-Current status: Pretty functional if Jekyll is installed.
+Current status: Works 🎉 – in need of testing
 
 ## Setup
 
@@ -11,21 +11,17 @@ Current status: Pretty functional if Jekyll is installed.
 
 ## Development
 
-In two tabs:
+In two terminal sessions:
 
 `npm run hot-server` for live-reloading
-`npm run start-hot` for Electron to start & listen
-
-<kbd>Ctrl+H</kbd> toggles the Redux panel
+`npm run start-hot` for Electron to start in hot mode. The front-end components will auto-reload.
 
 ## Packaging
 - For now, `npm run package` does a test packaging of the Darwin (OS X) distributable.
-- Unused Node modules have to be manually removed to help with the large size of the package.
+- Unused modules should be handpicked and removed from the package to help with its large size.
 
-## Known issues
-At least on OS X El Cap, the distributable's Node threads are unable to access the proper `$PATH`, while the dev environment runs fine.
+## License and acknowledgements
 
-This means that on the same machine the app started with `npm start` works fine, while the OS X distributable hangs when trying to start a Jekyll process.
-
-## License
-Based on [C. T. Lin](https://github.com/chentsulin)'s Electron React Boilerplate:
+Jekyll: MIT
+Electron: MIT
+This app: MIT
