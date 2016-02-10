@@ -1,0 +1,61 @@
+.site-serve-switch {
+  display: block;
+  flex: 0 0 38px;
+  padding: 0 8px;
+
+  &:hover .groove .knob { opacity: 0.8; }
+  &:active .groove .knob { opacity: 0.6; }
+
+  .groove {
+    background-color: $switch-bg;
+    border-radius: 11px;
+    padding: $switch-edge-difference;
+    height: ($switch-edge-difference * 2) + ($switch-knob-border-radius * 2) + $switch-knob-length + $switch-movement-length;
+    overflow: hidden;
+    width: ($switch-groove-border-radius * 2);
+    transition: background-color 200ms linear;
+
+    box-shadow: inset 0 2px 2px $light-color;
+
+    .knob {
+      border-radius: 8px;
+      height: ($switch-knob-border-radius * 2) + $switch-knob-length;
+      margin-top: 0;
+      width: $switch-knob-border-radius * 2;
+
+      background-position-y: bottom;
+
+      transition: background-color 100ms linear,
+                  background-position-y $timing-snappy $bouncy-ease,
+                  margin-top $timing-snappy $bouncy-ease,
+                  height $timing-snappy $bouncy-ease,
+                  opacity 200ms linear;
+    }
+  }
+
+
+  &.switch-off .groove .knob {
+    background-color: $boring-gray;
+    margin-top: $switch-movement-length;
+  }
+
+  &.switch-on .groove {
+    background-color: $switch-bg;
+
+   .knob {
+      background: $knob-gradient;
+      margin-top: 0;
+    }
+  }
+
+  &.switch-on:active .groove .knob { opacity: 0.6; }
+
+  &.switch-working .groove {
+    .knob {
+      background: $switch-bg url(../img/icn_rolling.svg) center no-repeat;
+      background-size: $switch-knob-border-radius * 2;
+      margin-top: $switch-movement-length / 2;
+      opacity: 1;
+    }
+  }
+}
