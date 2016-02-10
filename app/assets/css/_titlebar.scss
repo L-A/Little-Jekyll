@@ -15,6 +15,7 @@
   box-shadow: 0 0 8px 0 #afb0b5;
 
   .btn-close, .btn-minimize {
+    background: $boring-gray;
     cursor: default;
     display: inline-block;
     opacity: .4;
@@ -23,17 +24,19 @@
     height: 18px;
     width: 18px;
 
-    &:hover { opacity: 0.75; }
-    &:active { opacity: 1; }
+    transition: background-color $timing-snappy-btn linear;
+
+    &:hover { background: darken($boring-gray, 50%); }
+    &:active { background: darken($boring-gray, 35%); }
   }
 
   .btn-close {
-    background: url(../img/btn_close.svg) center no-repeat;
+    -webkit-mask: url(../img/btn_close.svg) center no-repeat;
     margin-left: 10px;
   }
 
   .btn-minimize {
-    background: url(../img/btn_minimize.svg) center no-repeat;
+    -webkit-mask: url(../img/btn_minimize.svg) center no-repeat;
     margin-left: 6px;
   }
 }
