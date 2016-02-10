@@ -20,7 +20,6 @@ var TitleBar = React.createClass({
       <div className="title-bar">
         <a onClick={this.close} className="btn-close"></a>
         <a onClick={this.minimize} className="btn-minimize"></a>
-        <img className="logo" src="assets/img/logo.svg" width="14" />
       </div>
     );
   }
