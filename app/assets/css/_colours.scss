@@ -1,10 +1,13 @@
-$primary-text-color: #64656a;
-$primary-color: #3333e8;
+$primary-text-color: #61636b;
+$primary-color: #263cd2;
 
 $light-color: #e9eaf3;
 $switch-bg: #f1f1f1;
-$boring-gray: #afb0b5;
-$options-bg-color: #4747aa;
+$boring-gray:lighten($primary-text-color, 20);
+$options-bg-color: #4350a6;
+$options-contrast-color: lighten($options-bg-color, 40%);
 
-$options-gradient: linear-gradient(to bottom, $options-bg-color, darken($options-bg-color, 10));
+$options-gradient: linear-gradient(to bottom, $options-bg-color, darken($options-bg-color, 5%));
+$options-reverse-gradient: linear-gradient(to top, $options-bg-color, darken($options-bg-color, 5%));
+
 $knob-gradient: linear-gradient(to bottom, lighten($primary-color, 4), $primary-color);

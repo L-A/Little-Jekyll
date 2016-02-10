@@ -1,11 +1,10 @@
 .options-bar {
-  border: solid 1px $options-bg-color;
+  border-bottom: solid 1px darken($options-bg-color, 30);
   display: flex;
   flex: 0 0 $options-bar-height;
   flex-direction: row;
   align-self: flex-end;
 
-  //background-color: $options-bg-color;
   background-image: $options-gradient;
   color: $light-color;
   position: relative;
@@ -14,23 +13,23 @@
 
   .btn-create, .btn-open, .btn-settings {
     align-self: center;
-    background: lighten($options-bg-color, 20%);
+    background: $options-contrast-color;
     cursor: default;
     display: inline-block;
     margin: 10px;
 
-    transition: background-color 100ms linear;
+    transition: background-color $timing-snappy-btn linear;
 
     height: 24px;
     width: 24px;
 
-      &:hover { background: lighten($options-bg-color, 30%); }
-      &:active { background: lighten($options-bg-color, 25%); }
+      &:hover { background: lighten($options-contrast-color, 10%); }
+      &:active { background: lighten($options-contrast-color, 20%); }
     }
 
     .hint-text {
       align-self: center;
-      color: lighten($options-bg-color, 30%);
+      color: $options-contrast-color;
       opacity: 0;
       text-align: center;
       flex: 1 0 auto;
