@@ -1,0 +1,72 @@
+body{
+  line-height: 1.4;
+}
+
+h1 {
+  color: $link-color;
+  font-size: 2.1em;
+  line-height: 1;
+
+  .container-reversed & {
+    color: $link-on-light-color;
+  }
+}
+
+h2, .like-h2 {
+  color: $link-color;
+  font-size: 1.5em;
+
+  .container-reversed & {
+    color: $link-on-light-color;
+  }
+}
+
+abbr {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: normal;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .15s;
+
+  &:hover {
+    color: $link-color;
+  }
+}
+
+p a, li a {
+  box-sizing: content-box;
+  border-bottom: dotted 1px darken($link-color, 15%);
+  color: $link-color;
+  display: span;
+  transition: border-bottom-color .15s;
+
+  &:hover {
+    border-bottom-color: $link-color;
+    color: $text-white;
+  }
+
+  .container-reversed & {
+    color: $link-on-light-color;
+
+    &:hover {
+      color: lighten($link-on-light-color, 25%);
+    }
+  }
+}
+
+p {
+  margin: 1.4em 0;
+}
+
+blockquote {
+  border-left: 2px solid #CCC;
+  color: darken($text-white, 15%);
+  margin-left: 0;
+  padding-left: 4em;
+  font-style: italic;
+  font-size: 1.25em;
+}
