@@ -34,3 +34,7 @@ Temporary Items
 # Compiled by Webpack
 dist/
 release/
+
+# Jekyll stuff
+_site
+.jekyll-metadata
