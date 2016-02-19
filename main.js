@@ -105,6 +105,15 @@ var initMainWindow = function () {
         }
       }]
     }, {
+      label: 'File',
+      submenu: [{
+        label: 'Open',
+        accelerator: 'Command+O',
+        click() {
+          appServer.openFile();
+        }
+      }]
+    }, {
       label: 'Edit',
       submenu: [{
         label: 'Undo',
@@ -208,7 +217,10 @@ var initMainWindow = function () {
       label: '&File',
       submenu: [{
         label: '&Open',
-        accelerator: 'Ctrl+O'
+        accelerator: 'Ctrl+O',
+        click() {
+          appServer.openFile();
+        }        
       }, {
         label: '&Close',
         accelerator: 'Ctrl+W',

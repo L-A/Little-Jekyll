@@ -5,3 +5,7 @@ module.exports.handleWillQuit = function() {
   // Nope, not here
   Dispatcher.handleWillQuit();
 }
+
+module.exports.openFile = function() {
+  Dispatcher.addSite();
+}

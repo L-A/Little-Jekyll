@@ -1,4 +1,5 @@
 import {ipcMain} from 'electron';
+import {app} from 'electron';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
 var reporter = null;
@@ -18,7 +19,7 @@ ipcMain.on('getSitesList', function(event) {
 });
 
 ipcMain.on('addSite', function(event) {
-  sitesStore.addSite(event.sender);
+  module.exports.addSite(event.sender);
 });
 
 ipcMain.on('createSite', function(event) {
@@ -54,4 +55,11 @@ module.exports.reporter = reporter;
 module.exports.handleWillQuit = function() {
   sitesStore.sendSitesList(reporter);
   sitesStore.stopAllServers();
+}
+
+module.exports.addSite = function(sender) {
+  if (sender || reporter) {
+    sender = sender ? sender : reporter;
+    sitesStore.addSite(sender);
+  }
 }
