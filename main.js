@@ -1,6 +1,8 @@
 /* eslint strict: 0 */
 'use strict';
 
+require('babel-core/register');
+
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -11,7 +13,7 @@ let menu;
 let template;
 let mainWindow = null;
 
-var appServer = require('./server/backend.js');
+var appServer = require('./server/dispatcher.js');
 
 // crashReporter.start();
 
@@ -54,7 +56,8 @@ var initMainWindow = function () {
     width: 340,
     height: 260,
     minWidth: 340,
-    minHeight: 230
+    minHeight: 230,
+    acceptFirstMouse: true
   });
 
   if (process.env.HOT) {
@@ -110,7 +113,7 @@ var initMainWindow = function () {
         label: 'Open',
         accelerator: 'Command+O',
         click() {
-          appServer.openFile();
+          appServer.addSite();
         }
       }]
     }, {
@@ -219,8 +222,8 @@ var initMainWindow = function () {
         label: '&Open',
         accelerator: 'Ctrl+O',
         click() {
-          appServer.openFile();
-        }        
+          appServer.addSite();
+        }
       }, {
         label: '&Close',
         accelerator: 'Ctrl+W',
