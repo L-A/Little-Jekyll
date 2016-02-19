@@ -23,7 +23,7 @@ ipcMain.on('addSite', function(event) {
 });
 
 ipcMain.on('createSite', function(event) {
-  sitesStore.createSite(event.sender);
+  module.exports.createSite(event.sender);
 });
 
 ipcMain.on('startServer', function(event, siteId) {
@@ -55,6 +55,13 @@ module.exports.reporter = reporter;
 module.exports.handleWillQuit = function() {
   sitesStore.sendSitesList(reporter);
   sitesStore.stopAllServers();
+}
+
+module.exports.createSite = function(sender) {
+  if (sender || reporter) {
+    sender = sender ? sender : reporter;
+    sitesStore.createSite(sender);
+  }
 }
 
 module.exports.addSite = function(sender) {
