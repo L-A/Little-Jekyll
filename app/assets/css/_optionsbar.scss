@@ -10,6 +10,8 @@
   height: $options-bar-height;
   width: 100%;
 
+  transition: transform $timing-snappy ease-out;
+
   .btn-create, .btn-open, .btn-settings {
     align-self: center;
     background: $options-contrast-color;
@@ -55,4 +57,8 @@
     -webkit-mask: url(../img/btn_settings.svg) center no-repeat;
   }
 
+}
+
+.empty-sites-list + .options-bar {
+  transform: translateY($options-bar-height);
 }

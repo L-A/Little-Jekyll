@@ -1,0 +1,32 @@
+import React, { Component } from 'react';
+import Dispatcher from '../utils/front-end-dispatcher';
+import SimpleButton from './simple-button'
+
+var EmptySitesList = React.createClass({
+  requestNewSite: function() {
+    Dispatcher.send('addSite');
+  },
+  createNewSite: function() {
+    Dispatcher.send('createSite');
+  },
+  render: function () {
+    var childIcon = <div className="icon" />;
+    return (
+      <div className="empty-sites-list" key="emptysiteslist">
+        <p>Oh dear! This list is empty.</p>
+        <div className="buttons-row">
+          <SimpleButton onClick={this.createNewSite} className="btn-create">
+            <div className="icon" />
+            <span>Create</span>
+          </SimpleButton>
+          <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open">
+            <div className="icon" />
+            <span>Open</span>
+          </SimpleButton>
+        </div>
+      </div>
+    );
+  }
+})
+
+module.exports = EmptySitesList;

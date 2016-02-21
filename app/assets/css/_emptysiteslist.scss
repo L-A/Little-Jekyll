@@ -1,0 +1,66 @@
+.empty-sites-list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 300;
+
+  p, .buttons-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  p {
+    color: $primary-color;
+    margin: 48px 0 50px;
+  }
+
+  .btn-create, .btn-open {
+    align-self: center;
+    display: flex-row;
+    flex: 0 0 auto;
+
+    padding: 0 40px;
+
+    span {
+      color: lighten($primary-text-color, 20%);
+      font-size: 12px;
+
+      transition: color $timing-snappy-btn linear;
+    }
+
+    &:hover .icon {
+      background-color: $primary-color;
+    }
+
+    &:hover span {
+      color: $primary-text-color;
+    }
+  }
+
+  .btn-create .icon, .btn-open .icon {
+    background-color: lighten($primary-color, 20%);
+    height: 34px;
+    width: 34px;
+
+    margin: 0 auto 6px;
+    transition: background-color $timing-snappy-btn linear;
+
+  }
+  .btn-create .icon {
+    -webkit-mask: url(../img/btn_create.svg) center no-repeat;
+    -webkit-mask-size: 80%;
+  }
+
+  .btn-open .icon{
+    -webkit-mask: url(../img/btn_open.svg) center no-repeat;
+    -webkit-mask-size: 95%;
+  }
+
+  .btn-create {
+    border-right: 1px solid $light-color;
+  }
+}

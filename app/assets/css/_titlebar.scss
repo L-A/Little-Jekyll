@@ -1,6 +1,6 @@
 .title-bar {
   flex: 0 0 $title-bar-height;
-  justify-content: space-between;
+  justify-content: flex-start;
 
   -webkit-app-region: drag;
   -webkit-user-select: none;
