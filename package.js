@@ -17,6 +17,7 @@ const shouldBuildAll = argv.all || false;
 
 
 const DEFAULT_OPTS = {
+  'app-version': pkg.version || null,
   dir: './',
   name: appName,
   asar: shouldUseAsar,
