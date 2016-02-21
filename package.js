@@ -21,6 +21,7 @@ const DEFAULT_OPTS = {
   dir: './',
   name: appName,
   asar: shouldUseAsar,
+  overwrite: true,
   ignore: [
     '/test($|/)',
     '/release($|/)'
