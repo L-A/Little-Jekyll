@@ -7,7 +7,7 @@ import { VelocityElement, VelocityTransitionGroup } from 'velocity-react';
 var SitesList = React.createClass({
   getInitialState: function() {
     Dispatcher.createCallback('updateSitesList', this.receiveSitesList);
-    return {sites: []};
+    return {sites: null};
   },
   componentDidMount: function() {
     Dispatcher.send('getSitesList');
@@ -16,7 +16,7 @@ var SitesList = React.createClass({
     this.setState({sites: list});
   },
   render: function () {
-    if (this.state.sites.length != 0) {
+    if (this.state.sites != null && this.state.sites.length > 0) {
       var siteNodes = this.state.sites.map( function(data){
         return (
           <Site key={data.id} siteInfo={data}/>
@@ -29,7 +29,7 @@ var SitesList = React.createClass({
       )
     } else {
       return (
-        <EmptySitesList />
+        <EmptySitesList sitesReceived={this.state.sites == null ? false : true} />
       );
     }
   }

@@ -10,22 +10,26 @@ var EmptySitesList = React.createClass({
     Dispatcher.send('createSite');
   },
   render: function () {
-    var childIcon = <div className="icon" />;
-    return (
-      <div className="empty-sites-list" key="emptysiteslist">
-        <p>Oh dear! This list is empty.</p>
-        <div className="buttons-row">
-          <SimpleButton onClick={this.createNewSite} className="btn-create">
-            <div className="icon" />
-            <span>Create</span>
-          </SimpleButton>
-          <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open">
-            <div className="icon" />
-            <span>Open</span>
-          </SimpleButton>
+    if(this.props.sitesReceived == true) {
+      var childIcon = <div className="icon" />;
+      return (
+        <div className="empty-sites-list">
+          <p>Oh dear! This list is empty.</p>
+          <div className="buttons-row">
+            <SimpleButton onClick={this.createNewSite} className="btn-create">
+              <div className="icon" />
+              <span>Create</span>
+            </SimpleButton>
+            <SimpleButton href="#" onClick={this.requestNewSite} className="btn-open">
+              <div className="icon" />
+              <span>Open</span>
+            </SimpleButton>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return ( <div className="empty-sites-list" /> );
+    }
   }
 })
 
