@@ -13,8 +13,8 @@ Current status: Works 🎉 – in need of testing
 
 In two terminal sessions:
 
-`npm run hot-server` for live-reloading
-`npm run start-hot` for Electron to start in hot mode. The front-end components will auto-reload.
+- `npm run hot-server` for live-reloading
+- `npm run start-hot` for Electron to start in hot mode. The front-end components will auto-reload.
 
 ## Packaging
 - For now, `npm run package` does a test packaging of the Darwin (OS X) distributable.
