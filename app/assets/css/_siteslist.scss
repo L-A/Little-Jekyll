@@ -103,7 +103,8 @@ $options-panel-width: 150px;
 
           vertical-align: top;
 
-          transition: margin-right $timing-snappy $bouncy-ease,
+          transition: background-color 100ms linear,
+                      margin-right $timing-snappy $bouncy-ease,
                       opacity 100ms linear,
                       width $timing-snappy $bouncy-ease;
 
@@ -114,6 +115,10 @@ $options-panel-width: 150px;
 
             &:hover { background: darken($primary-color, 10%); }
             &:active { opacity: 0.8; }
+
+            &.hold {
+              background: $boring-gray;
+            }
           }
         }
       }

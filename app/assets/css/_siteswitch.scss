@@ -1,3 +1,10 @@
+// Variables pour le knob
+$switch-knob-length: 6px; // 0 is round
+$switch-movement-length: 6px; // 0 is no movement, also determines switch height;
+$switch-groove-border-radius: 11px; // Is used in length calculations
+$switch-knob-border-radius: 8px; // Is used in length calculations
+$switch-edge-difference: $switch-groove-border-radius - $switch-knob-border-radius;
+
 .site-serve-switch {
   display: block;
   flex: 0 0 38px;
@@ -20,19 +27,26 @@
     .knob {
       border-radius: 8px;
       height: ($switch-knob-border-radius * 2) + $switch-knob-length;
+      position: relative;
       margin-top: 0;
       width: $switch-knob-border-radius * 2;
 
-      background-position-y: bottom;
-
-      transition: background-color 100ms linear,
-                  background-position-y $timing-snappy $bouncy-ease,
+      transition: background-color $timing-snappy linear,
                   margin-top $timing-snappy $bouncy-ease,
                   height $timing-snappy $bouncy-ease,
-                  opacity 200ms linear;
+                  opacity $timing-snappy linear;
+
+      .activity-indicator {
+        -webkit-mask: url(../img/icn_rolling.svg) center no-repeat;
+        -webkit-mask-size: 10%;
+        background-color: $boring-gray;
+        height: ($switch-knob-border-radius * 2) + $switch-knob-length;
+
+        transition: background-color $timing-snappy linear,
+                    -webkit-mask-size $timing-snappy ease;
+      }
     }
   }
-
 
   &.switch-off .groove .knob {
     background-color: $boring-gray;
@@ -43,8 +57,13 @@
     background-color: $switch-bg;
 
    .knob {
-      background: $knob-gradient;
+      background-color: $primary-color;
       margin-top: 0;
+
+      .activity-indicator {
+        -webkit-mask-size: 10%;
+        background-color: $primary-color;
+      }
     }
   }
 
@@ -52,10 +71,32 @@
 
   &.switch-working .groove {
     .knob {
-      background: $switch-bg url(../img/icn_rolling.svg) center no-repeat;
-      background-size: $switch-knob-border-radius * 2;
-      margin-top: $switch-movement-length / 2;
-      opacity: 1;
+      background-color: $switch-bg;
+      margin-top: $switch-movement-length/2;
+
+      .activity-indicator {
+        -webkit-mask-size: 100%;
+        background-color: $primary-color;
+        animation: working 1s $bouncy-ease 0s 10, giving-up linear 1s 10s forwards;
+      }
     }
+  }
+}
+
+@keyframes working {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes giving-up {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
   }
 }

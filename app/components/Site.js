@@ -9,9 +9,7 @@ var Site = React.createClass({
   },
   toggleServerState: function() {
     var message = this.props.siteInfo.serverActive ? 'stopServer' : 'startServer';
-    if( !this.props.siteInfo.serverWorking ) {
-      Dispatcher.send(message, this.props.siteInfo.id);
-    }
+    Dispatcher.send(message, this.props.siteInfo.id);
   },
   toggleOptionsPanel: function() {
     var newOptionsState = !this.state.optionsShown;
@@ -42,7 +40,9 @@ var Site = React.createClass({
         <div className="main-panel">
           <SimpleButton className={switchState} onClick={this.toggleServerState} hintText="Start and stop this server">
             <div className="groove">
-              <div className="knob"></div>
+              <div className="knob">
+                <div className="activity-indicator"></div>
+              </div>
             </div>
           </SimpleButton>
           <div className="site-info">
@@ -50,7 +50,7 @@ var Site = React.createClass({
             <SimpleButton className="site-folder" onClick={this.openFolder} textContent={siteInfo.filePath} hintText="Open site's folder"/>
           </div>
           <div className="site-options">
-            <SimpleButton className={siteInfo.serverActive ? 'btn-preview available' : 'btn-preview'} onClick={this.openLocalServer} hintText="Open in browser"/>
+            <SimpleButton className={siteInfo.serverActive ? (siteInfo.serverWorking ? 'btn-preview available hold' : 'btn-preview available') : 'btn-preview'} onClick={this.openLocalServer} hintText="Open in browser"/>
             <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Toggle the options panel"/>
           </div>
         </div>
