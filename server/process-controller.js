@@ -4,6 +4,7 @@ import sitesStore from './sites-store';
 import siteController from './site-controller';
 import browsersync from 'browser-sync';
 import Dispatcher from './dispatcher';
+import Logger from './logger';
 import path from 'path';
 
 var jekyllDist = path.join(require('electron').app.getAppPath(), "jekyll", "jekyll");
@@ -16,6 +17,7 @@ module.exports.newServer = function(requester, id, dir) {
     reportTo: requester,
     jekyllProcess: undefined,
     browserSyncProcess: browsersync.create(),
+    logger: Logger(),
     localURL: undefined,
     port: firstAvailablePort()
   };
@@ -33,24 +35,7 @@ module.exports.newServer = function(requester, id, dir) {
     server.jekyllProcess = startServer(dir);
     server.localURL = bs.options.getIn(["urls", "local"]);
     siteController.reportRunningServerOnSite(server.reportTo, server.siteID);
-
-    server.jekyllProcess.stdout.on('data',
-      function (data) {
-        serverUpdate(server, data);
-      }
-    )
-
-    server.jekyllProcess.stderr.on('data',
-      function (data) {
-        Dispatcher.report("Process error:" + data);
-      }
-    )
-
-    server.jekyllProcess.on('error',
-      function (data) {
-        Dispatcher.report("Spawn error:" + data);
-      }
-    )
+    server.logger.setup(server);
   });
 
   return server;
@@ -128,7 +113,6 @@ var updateHandlers = [
       // Unused
       // var duration = data.match(/\d+\.?\d*/g);
       siteController.reportAvailableServerOnSite(server.reportTo, server.siteID);
-      console.log()
     }
   },
   {
@@ -146,17 +130,7 @@ var updateHandlers = [
   }
 ];
 
-var serverUpdate = function(server, data) {
-  data = data.toString();
-  var matched = false;
-  for (var i = 0; i < updateHandlers.length; i++) {
-    if (data.search(updateHandlers[i].str) != -1) {
-      matched = true;
-      updateHandlers[i].handler(server, data);
-     }
-  }
-  if (matched == false) { console.log("no match: " + data) };
-}
+
 
 var firstAvailablePort = function () {
   var port = 4000;
