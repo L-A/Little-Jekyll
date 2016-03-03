@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Renderer from './components/Renderer';
+import UI from './components/UI.js';
 import css from './assets/css/style.scss';
 
 render(
-  <Renderer />,
+  <UI />,
   document.getElementById('root')
 );
