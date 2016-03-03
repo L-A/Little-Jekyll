@@ -7,7 +7,7 @@ import storage from './storage';
 
 var sitesList = [];
 var strippedList = [];
-var initialGetSitesList = true;
+var firstGetSitesList = true;
 
 var initSitesList = function(sitesData, sender) {
   if(sitesData) {
@@ -35,9 +35,9 @@ module.exports.setSiteProperty = function(id, property, value) {
 }
 
 module.exports.sendSitesList = function(sender) {
-  if (initialGetSitesList) {
+  if (firstGetSitesList) {
     storage.attemptToOpenSitesList(initSitesList, sender);
-    initialGetSitesList = false;
+    firstGetSitesList = false;
   } else {
     storage.updateSitesList(sitesList);
     if (sender) sender.send('updateSitesList', sitesList);
