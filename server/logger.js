@@ -41,7 +41,7 @@ let Logger = function () {
     },
     openLogsWindow: function() {
       this.window = Windows.initLogs();
-      this.window.webContents.send('updateLogs', this.logs);
+      Dispatcher.prepareLogs(this.logs);
     },
     sendLogs: function () {
       this.window.webContents.send('updateLogs', this.logs);
