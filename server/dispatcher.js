@@ -10,6 +10,10 @@ module.exports.report = function(message){
   if ( reporter ) reporter.send('report', message);
 }
 
+module.exports.createCallback = function (channel, callback) {
+  ipcMain.on(channel, callback);
+}
+
 ipcMain.on('hello', function(event) {
   reporter = event.sender;
 })
