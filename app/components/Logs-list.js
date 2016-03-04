@@ -6,7 +6,8 @@ import { VelocityElement, VelocityTransitionGroup } from 'velocity-react';
 
 var LogsList = React.createClass({
   getInitialState: function () {
-    Dispatcher.createCallback('updateLogs', this.receiveLogs);
+    Dispatcher.createCallback('setLogs', this.receiveLogs);
+    Dispatcher.send('getLogs');
     return {logs:[]};
   },
   receiveLogs: function (event, receivedLogs) {
