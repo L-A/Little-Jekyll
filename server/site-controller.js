@@ -34,7 +34,7 @@ module.exports.stopServerOnSite = function(sender, siteID) {
     sitesStore.setSiteProperty(siteID, 'server', undefined);
   }
 
-  sitesStore.sendSitesList(sender);
+  if (sender) { sitesStore.sendSitesList(sender) };
 }
 
 module.exports.removeSite = function (sender, siteID) {

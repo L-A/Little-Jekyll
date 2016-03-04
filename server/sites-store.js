@@ -41,7 +41,7 @@ module.exports.sendSitesList = function(sender) {
   } else {
     if (sitesList) {
       storage.updateSitesList(sitesList);
-      if (sender) sender.send('updateSitesList', sitesList);
+      sender.send('updateSitesList', sitesList);
     }
   }
 }
@@ -105,7 +105,7 @@ module.exports.removeSite = function(siteID) {
 module.exports.stopAllServers = function(id) {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].serverActive) {
-      siteController.stopServerOnSite(Dispatcher.reporter, sitesList[i].id);
+      siteController.stopServerOnSite(false, sitesList[i].id);
     }
   }
 }

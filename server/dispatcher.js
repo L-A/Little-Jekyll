@@ -75,7 +75,6 @@ ipcMain.on('endHint', function(event) {
 });
 
 module.exports.handleWillQuit = function() {
-  sitesStore.sendSitesList(reporter);
   sitesStore.stopAllServers();
 }
 
