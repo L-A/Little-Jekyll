@@ -2,6 +2,7 @@ import {ipcMain} from 'electron';
 import {app} from 'electron';
 import sitesStore from './sites-store.js';
 import siteController from './site-controller.js';
+import Logger from './logger.js';
 var reporter = null;
 
 // The best thing for testing packaged apps
@@ -44,6 +45,10 @@ ipcMain.on('removeSiteFromList', function(event, siteId) {
 
 ipcMain.on('buildSite', function(event, siteId) {
   siteController.buildSite(event.sender, siteId);
+});
+
+ipcMain.on('openServerLogs', function(event, siteId) {
+  siteController.openLogs(event.sender, siteId);
 });
 
 ipcMain.on('hint', function(event, hintText) {

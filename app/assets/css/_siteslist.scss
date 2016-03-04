@@ -71,7 +71,7 @@ $options-panel-width: 150px;
         padding: 4px 0 0;
         text-align: right;
 
-        .btn-edit, .btn-preview {
+        .btn-edit, .btn-preview, .btn-logs {
           display: inline-block;
           height: 24px;
         }
@@ -93,7 +93,7 @@ $options-panel-width: 150px;
           }
         }
 
-        .btn-preview {
+        .btn-preview, .btn-logs {
           background: $primary-color;
           -webkit-mask: url('../img/btn_preview.svg') center no-repeat;
           -webkit-mask-size: contain;
@@ -120,6 +120,12 @@ $options-panel-width: 150px;
               background: $boring-gray;
             }
           }
+        }
+
+        .btn-logs {
+          -webkit-mask: url('../img/btn_logs.svg') center no-repeat;
+          -webkit-mask-size: contain;
+          &.available { width: 20px; }
         }
       }
     }

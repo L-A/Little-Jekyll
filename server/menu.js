@@ -1,7 +1,7 @@
 const electron = require('electron');
 const shell = electron.shell;
 
-module.exports.osxMenu = function(app, appServer) {
+module.exports.osxMenu = function(app, appServer, mainWindow) {
    return [{
     label: 'Little Jekyll',
     submenu: [{

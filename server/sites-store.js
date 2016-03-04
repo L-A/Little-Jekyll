@@ -39,8 +39,10 @@ module.exports.sendSitesList = function(sender) {
     storage.attemptToOpenSitesList(initSitesList, sender);
     firstGetSitesList = false;
   } else {
-    storage.updateSitesList(sitesList);
-    if (sender) sender.send('updateSitesList', sitesList);
+    if (sitesList) {
+      storage.updateSitesList(sitesList);
+      if (sender) sender.send('updateSitesList', sitesList);
+    }
   }
 }
 

@@ -1,9 +1,11 @@
 import Dispatcher from './dispatcher';
 import siteController from './site-controller';
+import Windows from './windows';
 
 let Logger = function () {
-  return ({
+  var newLogger = {
     logs: [],
+    window: null,
     addLog: function (logData, logType) {
       logType = logType || "std";
       logData = logData.toString();
@@ -11,10 +13,11 @@ let Logger = function () {
       if (logData.match(/best/i)) { logType = "err" } // Not very reliable, but helps some
       // newLogEntry is a string?
       this.logs.push({
+        time: new Date().valueOf(),
         log: logData,
         type: logType
       });
-      Dispatcher.report(this.logs);
+      if (this.window != null) { this.sendLogs() };
     },
     setup: function (server) {
       server.jekyllProcess.stdout.on('data',
@@ -35,8 +38,16 @@ let Logger = function () {
           // ssssh
         }
       )
+    },
+    openLogsWindow: function() {
+      this.window = Windows.initLogs();
+      this.window.webContents.send('updateLogs', this.logs);
+    },
+    sendLogs: function () {
+      this.window.webContents.send('updateLogs', this.logs);
     }
-  })
+  }
+  return newLogger;
 };
 
 var serverUpdate = function(server, data) {
@@ -83,7 +94,6 @@ var updateHandlers = [
       // Unused
       // var duration = data.match(/\d+\.?\d*/g);
       siteController.reportAvailableServerOnSite(server.reportTo, server.siteID);
-      console.log()
     }
   },
   {

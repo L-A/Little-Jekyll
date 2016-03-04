@@ -4,16 +4,13 @@ import processController from './process-controller.js';
 module.exports.startServerOnSite = function(sender, siteID) {
   var site = sitesStore.siteById(siteID);
   var newServer = processController.newServer(sender, site.id, site.filePath);
-
   sitesStore.setSiteProperty(siteID, 'serverWorking', true);
   sitesStore.setSiteProperty(siteID, 'server', newServer);
-
   sitesStore.sendSitesList(sender);
 }
 
 module.exports.reportRunningServerOnSite = function(sender, siteID) {
   sitesStore.setSiteProperty(siteID, 'serverActive', true);
-
   sitesStore.sendSitesList(sender);
 }
 
@@ -44,6 +41,14 @@ module.exports.removeSite = function (sender, siteID) {
   var site = sitesStore.siteById(siteID);
   if (site.server) { module.exports.stopServerOnSite(sender, siteID)}
   sitesStore.removeSite(siteID);
+
+  sitesStore.sendSitesList(sender);
+}
+
+module.exports.openLogs = function (sender, siteID) {
+  var site = sitesStore.siteById(siteID);
+  console.log(siteID);
+  if (site.server) { site.server.logger.openLogsWindow(siteID); }
 
   sitesStore.sendSitesList(sender);
 }

@@ -12,10 +12,10 @@ config.debug = true;
 
 config.devtool = 'cheap-module-eval-source-map';
 
-config.entry = [
-  'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-  './app/index'
-];
+config.entry = {
+  index: ['webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr', './app/index.js'],
+  logs: ['webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr', './app/logs-index.js']
+};
 
 config.output.publicPath = 'http://localhost:3000/dist/';
 

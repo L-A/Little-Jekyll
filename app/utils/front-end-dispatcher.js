@@ -8,6 +8,7 @@ var dispatcher = {
     } else {
       ipcRenderer.send(message, content);
     }
+    console.log('Sending ' + message);
   },
   createCallback: function(channel, callback) {
     ipcRenderer.on(channel, callback);
