@@ -47,7 +47,6 @@ module.exports.removeSite = function (sender, siteID) {
 
 module.exports.openLogs = function (sender, siteID) {
   var site = sitesStore.siteById(siteID);
-  console.log(siteID);
   if (site.server) { site.server.logger.openLogsWindow(siteID); }
 
   sitesStore.sendSitesList(sender);
