@@ -44,7 +44,7 @@ let Logger = function () {
       Dispatcher.prepareLogs(this.logs);
     },
     sendLogs: function () {
-      this.window.webContents.send('updateLogs', this.logs);
+      this.window.webContents.send('setLogs', this.logs);
     }
   }
   return newLogger;
