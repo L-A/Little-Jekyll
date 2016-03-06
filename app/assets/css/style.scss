@@ -15,6 +15,7 @@ $timing-snappy-btn: 100ms;
 @import 'siteslist';
 @import 'siteswitch';
 @import 'optionsbar';
+@import 'logs';
 @import 'emptysiteslist';
 
 html {
@@ -30,13 +31,13 @@ body {
   height: 100%;
 }
 
-.ui-root {
+.ui-root, .logs-root {
   display: flex;
   flex-flow: column;
   height: 100%;
   margin: 0;
 }
 
-.ui-root > div {
+body>div {
   height: 100%;
 }

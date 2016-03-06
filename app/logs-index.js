@@ -5,5 +5,5 @@ import css from './assets/css/style.scss';
 
 render(
   <LogsUI />,
-  document.getElementById('logs-root')
+  document.getElementById('root')
 );

@@ -10,7 +10,7 @@ var LogsUI = React.createClass({
   },
   render: function() {
     return (
-      <div className="logs-ui-root">
+      <div className="logs-root">
         <TitleBar />
         <LogsList />
       </div>
