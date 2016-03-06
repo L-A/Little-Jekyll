@@ -2,6 +2,7 @@ import Path from 'path';
 import { BrowserWindow, Menu, app } from 'electron';
 
 const appPath = Path.join('file:', app.getAppPath(), 'app');
+const darwin = (process.platform === 'darwin');
 
 module.exports.initMain = function (appServer) {
   let menu;
@@ -23,11 +24,14 @@ module.exports.initMain = function (appServer) {
     mainWindow = null;
   });
 
-  // if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
+  // if (darwin) {
+  //   mainWindow.on('close', function(event) {
+  //     event.preventDefault();
+  //     mainWindow.hide();
+  //   })
   // }
 
-  if (process.platform === 'darwin') {
+  if (darwin) {
     template = require("./menu.js").osxMenu(app, appServer, mainWindow);
     menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
@@ -53,11 +57,16 @@ module.exports.initLogs = function () {
 
   logsWindow.loadURL(url);
 
-  logsWindow.openDevTools();
-
   logsWindow.on('closed', () => {
     logsWindow = null;
   });
+
+  // if (darwin) {
+  //   logsWindow.on('close', function(event) {
+  //     event.preventDefault();
+  //     logsWindow.hide();
+  //   })
+  // }
 
   return logsWindow;
 };

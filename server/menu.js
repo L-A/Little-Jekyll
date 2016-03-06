@@ -1,5 +1,6 @@
 const electron = require('electron');
 const shell = electron.shell;
+const browserWindow = electron.BrowserWindow;
 
 module.exports.osxMenu = function(app, appServer, mainWindow) {
    return [{
@@ -114,7 +115,9 @@ module.exports.osxMenu = function(app, appServer, mainWindow) {
     }, {
       label: 'Close',
       accelerator: 'Command+W',
-      selector: 'hide:'
+      click() {
+        browserWindow.getFocusedWindow().hide();
+      }
     }, {
       type: 'separator'
     }, {
