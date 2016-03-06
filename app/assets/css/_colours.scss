@@ -1,11 +1,15 @@
 $primary-text-color: #61636b;
 $primary-color: #4350a6;
+$success-color: #068666;
+$error-color: #be1d49;
 
 $light-color: #e9eaf3;
 $switch-bg: #f1f1f1;
 $boring-gray:lighten($primary-text-color, 20);
 $options-bg-color: #4350a6;
 $options-contrast-color: lighten($options-bg-color, 40%);
+
+$console-bg-color: #3e4044;
 
 $options-gradient: linear-gradient(to bottom, $options-bg-color, darken($options-bg-color, 5%));
 $options-reverse-gradient: linear-gradient(to top, $options-bg-color, darken($options-bg-color, 5%));

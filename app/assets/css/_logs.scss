@@ -1,0 +1,48 @@
+.logs-root {
+  background-color: white;
+  color: $primary-text-color;
+  font-family: monospace;
+
+
+  .logs-list {
+    flex: 1 0 1;
+    margin: 0;
+    position: relative;
+
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1;
+
+    li {
+      align-items: baseline;
+      border-bottom: solid 1px $light-color;
+      border-left: solid 4px $light-color;
+      display: flex;
+      flex-direction: row;
+
+      padding: 6px 12px;
+
+      .log-data {
+        flex: 1 1 auto;
+        padding-right: 1em;
+        white-space: pre-line;
+      }
+
+      .time {
+        color: darken($light-color, 20%);
+        flex: 0 0 100px;
+        font-size: 0.8em;
+      }
+
+      &.success {
+        border-left-color: $success-color;
+        color: $success-color;
+      }
+
+      &.err {
+        border-left-color: $error-color;
+        color: $error-color;
+      }
+    }
+  }
+}

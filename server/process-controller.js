@@ -77,6 +77,7 @@ module.exports.stopServer = function(server) {
   }
   server.browserSyncProcess.exit();
   server.jekyllProcess.kill();
+  server.logger.closeLogsWindow();
 }
 
 // There's probably some better organization to do here

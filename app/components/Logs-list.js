@@ -22,7 +22,7 @@ var LogsList = React.createClass({
           );
       })
       return(
-        <VelocityTransitionGroup component="ul" className="logs-list" enter={{animation: "slideDown", stagger:25, duration: 300, easing: "easeInOutQuart"}} leave={{animation: "slideUp", easing: "easeInOutQuart", duration: 450, delay:175}}>
+        <VelocityTransitionGroup component="ul" className="logs-list" enter={{animation: "slideDown", stagger:25, duration: 300, easing: "easeInOutQuart", display: "flex"}} leave={{animation: "slideUp", easing: "easeInOutQuart", duration: 450, delay:175}}>
           {logsNodes}
         </VelocityTransitionGroup>
       )

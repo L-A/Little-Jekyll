@@ -10,11 +10,12 @@ let Logger = function () {
       logType = logType || "std";
       logData = logData.toString();
 
-      if (logData.match(/best/i)) { logType = "err" } // Not very reliable, but helps some
+      if (logData.match(/error/i)) { logType = "err" }
+      if (logData.search("done\ in ") != -1) { logType = "success" } // Not very reliable, but helps some
       // newLogEntry is a string?
       this.logs.push({
         time: new Date().valueOf(),
-        log: logData,
+        log: logData.replace(/(\[\d+m)/g, '').trim(),
         type: logType
       });
       if (this.window != null) { this.sendLogs() };
@@ -40,11 +41,21 @@ let Logger = function () {
       )
     },
     openLogsWindow: function() {
-      this.window = Windows.initLogs();
-      Dispatcher.prepareLogs(this.logs);
+      if ( this.window ) {
+        this.window.show();
+      } else {
+        this.window = Windows.initLogs();
+        this.window.on('did-start-loading', function() {
+          Dispatcher.prepareLogs(this.logs);
+        })
+        Dispatcher.prepareLogs(this.logs);
+      }
     },
     sendLogs: function () {
       this.window.webContents.send('setLogs', this.logs);
+    },
+    closeLogsWindow: function () {
+      if (this.window) { this.window.close(); }
     }
   }
   return newLogger;
