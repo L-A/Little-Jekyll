@@ -61,7 +61,7 @@ let Logger = function () {
       this.window.webContents.send('setLogs', this.logs);
     },
     closeLogsWindow: function () {
-      if (this.window) { this.window.close(); }
+      this.window = null;
     }
   }
   return newLogger;
