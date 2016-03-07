@@ -61,6 +61,10 @@ module.exports.initLogs = function () {
     logsWindow = null;
   });
 
+  app.on('before-quit', () => {
+    logsWindow = null;
+  });
+
   // if (darwin) {
   //   logsWindow.on('close', function(event) {
   //     event.preventDefault();
