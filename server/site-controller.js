@@ -24,6 +24,16 @@ module.exports.reportAvailableServerOnSite = function(sender, siteID) {
   sitesStore.sendSitesList(sender);
 }
 
+module.exports.reportErrorOnSite = function(sender, siteID) {
+  sitesStore.setSiteProperty(siteID, 'hasError', true);
+  sitesStore.sendSitesList(sender);
+}
+
+module.exports.reportSuccessOnSite = function(sender, siteID) {
+  sitesStore.setSiteProperty(siteID, 'hasError', false);
+  sitesStore.sendSitesList(sender);
+}
+
 module.exports.stopServerOnSite = function(sender, siteID) {
   var server = sitesStore.siteById(siteID).server;
 

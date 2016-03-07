@@ -53,7 +53,7 @@ var Site = React.createClass({
             <SimpleButton className="site-folder" onClick={this.openFolder} textContent={siteInfo.filePath} hintText="Open site's folder"/>
           </div>
           <div className="site-options">
-            <SimpleButton className={siteInfo.serverActive ? "btn-logs available" : "btn-logs"} onClick={this.openServerLogs} hintText="Open logs"/>
+            <SimpleButton className={siteInfo.serverActive ? (siteInfo.hasError ? "btn-logs available error" : "btn-logs available") : "btn-logs"} onClick={this.openServerLogs} hintText="Open logs"/>
             <SimpleButton className={siteInfo.serverActive ? (siteInfo.serverWorking ? 'btn-preview available hold' : 'btn-preview available') : 'btn-preview'} onClick={this.openLocalServer} hintText="Open in browser"/>
             <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Toggle the options panel"/>
           </div>

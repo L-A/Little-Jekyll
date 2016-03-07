@@ -69,6 +69,7 @@ module.exports.addSite = function(sender, filePaths) {
         filePath: filePath,
         serverActive: false,
         serverWorking: false,
+        hasError: false,
         server: null
       });
     }

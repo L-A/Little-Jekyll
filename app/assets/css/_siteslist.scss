@@ -119,6 +119,10 @@ $options-panel-width: 150px;
             &.hold {
               background: $boring-gray;
             }
+
+            &.error {
+              background: $error-color;
+            }
           }
         }
 

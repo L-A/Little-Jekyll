@@ -19,6 +19,7 @@ module.exports.newServer = function(requester, id, dir) {
     browserSyncProcess: browsersync.create(),
     logger: Logger(),
     localURL: undefined,
+    hasError: false,
     port: firstAvailablePort()
   };
 
