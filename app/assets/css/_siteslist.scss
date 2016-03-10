@@ -1,4 +1,5 @@
-$options-panel-width: 150px;
+$options-panel-width: 180px;
+$options-panel-offset: 44px;
 
 .sites-list {
   flex: 1 1 auto;
@@ -12,19 +13,25 @@ $options-panel-width: 150px;
   .site-cell {
     position: relative;
     z-index: 2;
+    border-bottom: 1px solid #f1f2f2;
+    overflow: hidden;
 
     &.options-shown .main-panel {
-      transform: translateX(-$options-panel-width + 2);
+      transform: translateX(-$options-panel-width);
       border-top-right-radius: 2px;
       border-bottom-right-radius: 2px;
     }
 
     .main-panel{
       background-color: white;
-      border-bottom: 1px solid #f1f2f2;
       display: flex;
       flex-direction: row;
       align-items: center;
+
+      box-shadow: 2px 0 4px $light-color;
+
+      transform: translateX(-$options-panel-offset);
+      padding: 0 8px 0 $options-panel-offset;
 
       position: relative;
       z-index: 5;
@@ -71,7 +78,7 @@ $options-panel-width: 150px;
         padding: 4px 0 0;
         text-align: right;
 
-        .btn-edit, .btn-preview, .btn-logs {
+        .btn-edit, .btn-preview {
           display: inline-block;
           height: 24px;
         }
@@ -93,7 +100,7 @@ $options-panel-width: 150px;
           }
         }
 
-        .btn-preview, .btn-logs {
+        .btn-preview{
           background: $primary-color;
           -webkit-mask: url('../img/btn_preview.svg') center no-repeat;
           -webkit-mask-size: contain;
@@ -119,27 +126,15 @@ $options-panel-width: 150px;
             &.hold {
               background: $boring-gray;
             }
-
-            &.error {
-              background: $error-color;
-            }
           }
-        }
-
-        .btn-logs {
-          -webkit-mask: url('../img/btn_logs.svg') center no-repeat;
-          -webkit-mask-size: contain;
-          &.available { width: 20px; }
         }
       }
     }
 
     .secondary-panel {
-      background: $options-reverse-gradient;
+      background: white;
       height: 100%; // Apparently fixes a border flash?
       width: $options-panel-width;
-
-      border-top: solid 1px lighten($options-bg-color, 10%);
 
       display: flex;
       align-items: center;
@@ -151,10 +146,9 @@ $options-panel-width: 150px;
       right: 0;
 
       z-index: 2;
-      box-shadow: inset 0 0 10px darken($options-bg-color, 20%);
 
-      .btn-edit, .btn-remove, .btn-build {
-        background: $options-contrast-color;
+      .btn-edit, .btn-remove, .btn-build, .btn-logs {
+        background: $boring-gray;
         height: 20px;
         margin-left: 20px;
         position: relative;
@@ -162,22 +156,13 @@ $options-panel-width: 150px;
 
         transition: background-color $timing-snappy-btn linear;
 
-        &:hover { background: lighten($options-contrast-color, 10%); }
-        &:active { background: lighten($options-contrast-color, 20%); }
+        &:hover { background: darken($boring-gray, 30%); }
+        &:active { background: darken($boring-gray, 20%); }
       }
 
       .btn-edit {
         -webkit-mask: url('../img/btn_edit.svg') center no-repeat;
-        background: darken($options-bg-color, 20%);
         margin-right: 13px;
-
-        &:hover {
-          background: darken($options-bg-color, 30%);
-        }
-
-        &:active {
-          background: darken($options-bg-color, 25%);
-        }
       }
 
       .btn-remove {
@@ -187,6 +172,14 @@ $options-panel-width: 150px;
 
       .btn-build {
         -webkit-mask: url('../img/btn_export.svg') center no-repeat;
+      }
+
+      .btn-logs {
+        -webkit-mask: url('../img/btn_logs.svg') center no-repeat;
+        -webkit-mask-size: contain;
+        width: 0;
+        &.available { width: 24px; }
+        &.error { background: $error-color; }
       }
     }
   }
