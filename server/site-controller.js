@@ -41,6 +41,7 @@ module.exports.stopServerOnSite = function(sender, siteID) {
     processController.stopServer(server);
     sitesStore.setSiteProperty(siteID, 'serverActive', false);
     sitesStore.setSiteProperty(siteID, 'serverWorking', false);
+    sitesStore.setSiteProperty(siteID, 'hasError', undefined);
     sitesStore.setSiteProperty(siteID, 'server', undefined);
   }
 

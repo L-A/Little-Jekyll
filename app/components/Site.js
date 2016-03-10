@@ -36,7 +36,7 @@ var Site = React.createClass({
   },
   render: function () {
     var siteInfo = this.props.siteInfo;
-    var cellClass = this.state.optionsShown ? "site-cell options-shown" : "site-cell";
+    var cellClass = (this.state.optionsShown ? "site-cell options-shown" : "site-cell") + (siteInfo.hasError ? " error" : "");
     var switchState = 'site-serve-switch ' + (siteInfo.serverWorking ? 'switch-working' : (siteInfo.serverActive ? 'switch-on' : 'switch-off'));
     return (
       <li className={cellClass}>
