@@ -3,8 +3,8 @@
 # changes made to this file will be lost the next time ruby is built.
 
 module RbConfig
-  RUBY_VERSION.start_with?("2.2.2"[/^[0-9]+[.][0-9]+[.]/]) or
-    raise "ruby lib version (2.2.2) doesn't match executable version (#{RUBY_VERSION})"
+  RUBY_VERSION == "2.2.0" or
+    raise "ruby lib version (2.2.0) doesn't match executable version (#{RUBY_VERSION})"
 
   TOPDIR = File.dirname(__FILE__).chomp!("/lib/ruby/2.2.0/x86_64-darwin13")
   DESTDIR = '' unless defined? DESTDIR
@@ -13,10 +13,10 @@ module RbConfig
   CONFIG["MAJOR"] = "2"
   CONFIG["MINOR"] = "2"
   CONFIG["TEENY"] = "0"
-  CONFIG["PATCHLEVEL"] = "95"
+  CONFIG["PATCHLEVEL"] = "0"
   CONFIG["INSTALL"] = '/usr/bin/install -c'
   CONFIG["EXEEXT"] = ""
-  CONFIG["prefix"] = (TOPDIR || DESTDIR + "/tmp/ruby-2.2.2/inst")
+  CONFIG["prefix"] = (TOPDIR || DESTDIR + "/tmp/ruby-2.2.0/inst")
   CONFIG["ruby_install_name"] = "$(RUBY_BASE_NAME)"
   CONFIG["RUBY_INSTALL_NAME"] = "$(RUBY_BASE_NAME)"
   CONFIG["RUBY_SO_NAME"] = "$(RUBY_BASE_NAME)"
@@ -37,7 +37,7 @@ module RbConfig
   CONFIG["RUBY_SEARCH_PATH"] = ""
   CONFIG["UNIVERSAL_INTS"] = ""
   CONFIG["UNIVERSAL_ARCHNAMES"] = ""
-  CONFIG["configure_args"] = " '--prefix' '/tmp/ruby-2.2.2/inst' '--disable-install-doc' '--disable-install-rdoc' '--disable-install-capi' '--without-ext=tk,sdbm,gdbm,dbm,dl,coverage' '--with-openssl-dir=/Users/hongli/Projects/traveling-ruby/osx/runtime' 'CC=/Users/hongli/Projects/traveling-ruby/osx/internal/bin/cc' 'CXX=/Users/hongli/Projects/traveling-ruby/osx/internal/bin/c++'"
+  CONFIG["configure_args"] = " '--prefix' '/tmp/ruby-2.2.0/inst' '--disable-install-doc' '--disable-install-rdoc' '--disable-install-capi' '--without-ext=tk,sdbm,gdbm,dbm,dl,coverage' '--with-openssl-dir=/Users/hongli/Projects/traveling-ruby/osx/runtime' 'CC=/Users/hongli/Projects/traveling-ruby/osx/internal/bin/cc' 'CXX=/Users/hongli/Projects/traveling-ruby/osx/internal/bin/c++'"
   CONFIG["vendorarchdir"] = "$(vendorlibdir)/$(sitearch)"
   CONFIG["vendorlibdir"] = "$(vendordir)/$(ruby_version)"
   CONFIG["vendordir"] = "$(rubylibprefix)/vendor_ruby"
@@ -54,7 +54,7 @@ module RbConfig
   CONFIG["sitearchlibdir"] = "$(libdir)/$(sitearch)"
   CONFIG["archlibdir"] = "$(libdir)/$(arch)"
   CONFIG["libdirname"] = "libdir"
-  CONFIG["RUBY_EXEC_PREFIX"] = "/tmp/ruby-2.2.2/inst"
+  CONFIG["RUBY_EXEC_PREFIX"] = "/tmp/ruby-2.2.0/inst"
   CONFIG["RUBY_LIB_VERSION"] = ""
   CONFIG["RUBY_LIB_VERSION_STYLE"] = "3\t/* full */"
   CONFIG["RI_BASE_NAME"] = "ri"
@@ -96,7 +96,7 @@ module RbConfig
   CONFIG["INSTALLDOC"] = "nodoc"
   CONFIG["CAPITARGET"] = "nodoc"
   CONFIG["RDOCTARGET"] = "nodoc"
-  CONFIG["DTRACE_REBUILD"] = ""
+  CONFIG["DTRACE_GLOMMED_OBJ"] = ""
   CONFIG["DTRACE_OBJ"] = ""
   CONFIG["DTRACE_EXT"] = "d"
   CONFIG["EXECUTABLE_EXTS"] = ""
@@ -196,7 +196,7 @@ module RbConfig
   CONFIG["build_vendor"] = "apple"
   CONFIG["build_cpu"] = "x86_64"
   CONFIG["build"] = "x86_64-apple-darwin13.4.0"
-  CONFIG["RUBY_PROGRAM_VERSION"] = "2.2.2"
+  CONFIG["RUBY_PROGRAM_VERSION"] = "2.2.0"
   CONFIG["HAVE_BASERUBY"] = "yes"
   CONFIG["target_alias"] = ""
   CONFIG["host_alias"] = ""

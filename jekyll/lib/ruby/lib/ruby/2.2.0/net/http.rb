@@ -385,7 +385,7 @@ module Net   #:nodoc:
   class HTTP < Protocol
 
     # :stopdoc:
-    Revision = %q$Revision: 49278 $.split[1]
+    Revision = %q$Revision: 48582 $.split[1]
     HTTPVersion = '1.1'
     begin
       require 'zlib'
@@ -1350,8 +1350,7 @@ module Net   #:nodoc:
     #    puts response.body
     #
     def send_request(name, path, data = nil, header = nil)
-      has_response_body = name != 'HEAD'
-      r = HTTPGenericRequest.new(name,(data ? true : false),has_response_body,path,header)
+      r = HTTPGenericRequest.new(name,(data ? true : false),true,path,header)
       request r, data
     end
 

@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/dtao/safe_yaml"
   s.licenses = ["MIT"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
-  s.rubygems_version = "2.4.8"
+  s.rubygems_version = "2.4.6"
   s.summary = "SameYAML provides an alternative implementation of YAML.load suitable for accepting user input in Ruby applications."
 
-  s.installed_by_version = "2.4.8" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.4.6" if s.respond_to? :installed_by_version
 end
