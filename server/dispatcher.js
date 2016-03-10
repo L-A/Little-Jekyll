@@ -7,7 +7,10 @@ import Logger from './logger.js';
 var reporter = null;
 var nextLogs = null;
 
+// Not all events come from the front-end, but that's
+// where we want to display them if needed.
 module.exports.reporter = reporter;
+ipcMain.on('hello', function(event) { reporter = event.sender; })
 
 // The best thing for testing packaged apps
 module.exports.report = function(message){
@@ -23,15 +26,29 @@ module.exports.prepareLogs = function(logsToSend) {
   nextLogs = logsToSend;
 }
 
+module.exports.handleWillQuit = function() {
+  sitesStore.stopAllServers();
+}
+
+module.exports.createSite = function(sender) {
+  if (sender || reporter) {
+    sender = sender ? sender : reporter;
+    sitesStore.createSite(sender);
+  }
+}
+
+module.exports.addSite = function(sender) {
+  if (sender || reporter) {
+    sender = sender ? sender : reporter;
+    sitesStore.addSite(sender);
+  }
+}
+
 ipcMain.on('getLogs', function(event) {
   if (nextLogs) {
     event.sender.send('setLogs', nextLogs);
     nextLogs = null;
   }
-})
-
-ipcMain.on('hello', function(event) {
-  reporter = event.sender;
 })
 
 ipcMain.on('getSitesList', function(event) {
@@ -67,27 +84,9 @@ ipcMain.on('openServerLogs', function(event, siteId) {
 });
 
 ipcMain.on('hint', function(event, hintText) {
-  event.sender.send('hint', hintText); // I dub this the lol roundtrip
+  event.sender.send('hint', hintText);
 });
 
 ipcMain.on('endHint', function(event) {
   event.sender.send('endHint');
 });
-
-module.exports.handleWillQuit = function() {
-  sitesStore.stopAllServers();
-}
-
-module.exports.createSite = function(sender) {
-  if (sender || reporter) {
-    sender = sender ? sender : reporter;
-    sitesStore.createSite(sender);
-  }
-}
-
-module.exports.addSite = function(sender) {
-  if (sender || reporter) {
-    sender = sender ? sender : reporter;
-    sitesStore.addSite(sender);
-  }
-}
