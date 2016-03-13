@@ -16,6 +16,7 @@ let Logger = function () {
         time: new Date().valueOf()
       }
 
+      if (logEntry.logData.search("Error:") != -1) { logEntry.logType = "err" }
       if (logEntry.logData.search("done\ in ") != -1) { logEntry.logType = "success" }
 
       if (logEntry.logType === "err") { siteController.reportErrorOnSite(server.reportTo, server.siteID); }
@@ -60,7 +61,7 @@ let Logger = function () {
       this.window.webContents.send('setLogs', this.logs);
     },
     closeLogsWindow: function () {
-      this.window = null;
+      if (this.window) { this.window.close() };
     }
   }
   return newLogger;

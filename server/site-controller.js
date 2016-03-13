@@ -34,11 +34,11 @@ module.exports.reportSuccessOnSite = function(sender, siteID) {
   sitesStore.sendSitesList(sender);
 }
 
-module.exports.stopServerOnSite = function(sender, siteID) {
+module.exports.stopServerOnSite = function(sender, siteID, ignoreLogsWindow) {
   var server = sitesStore.siteById(siteID).server;
 
   if (server) {
-    processController.stopServer(server);
+    processController.stopServer(server, ignoreLogsWindow);
     sitesStore.setSiteProperty(siteID, 'serverActive', false);
     sitesStore.setSiteProperty(siteID, 'serverWorking', false);
     sitesStore.setSiteProperty(siteID, 'hasError', undefined);

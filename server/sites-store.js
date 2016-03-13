@@ -103,10 +103,10 @@ module.exports.removeSite = function(siteID) {
     sitesList.splice(sitesList.indexOf(site), 1);
 }
 
-module.exports.stopAllServers = function(id) {
+module.exports.stopAllServers = function() {
   for (var i=0; i < sitesList.length; i++) {
     if (sitesList[i].serverActive) {
-      siteController.stopServerOnSite(false, sitesList[i].id);
+      siteController.stopServerOnSite(false, sitesList[i].id, true);
     }
   }
 }

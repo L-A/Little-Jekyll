@@ -72,13 +72,13 @@ var startServer = function(dir) {
   return childProcess.spawn(jekyllDist, cmdLineArgs)
 }
 
-module.exports.stopServer = function(server) {
+module.exports.stopServer = function(server, ignoreLogsWindow) {
   for(var i = 0; i < usedPorts.length; i++) {
     if (server.port == usedPorts[i]) usedPorts.splice(i, 1);
   }
   server.browserSyncProcess.exit();
   server.jekyllProcess.kill();
-  server.logger.closeLogsWindow();
+  if (!ignoreLogsWindow) { server.logger.closeLogsWindow() };
 }
 
 // There's probably some better organization to do here
