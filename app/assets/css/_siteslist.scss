@@ -1,5 +1,5 @@
-$options-panel-width: 140px;
-$options-panel-offset: 44px;
+$options-panel-width: 148px;
+$options-panel-offset: 36px;
 $error-button-offset: 32px;
 
 .sites-list {
@@ -17,10 +17,10 @@ $error-button-offset: 32px;
     border-bottom: 1px solid #f1f2f2;
     overflow: hidden;
 
+    &:hover .main-panel,  &.error .main-panel{ box-shadow: 2px 0 4px $light-color; }
     &.options-shown .main-panel,  &.options-shown.error .main-panel{
       margin-right: $options-panel-width;
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
+      box-shadow: 2px 0 4px $light-color;
     }
 
     &.error .main-panel {
@@ -35,14 +35,13 @@ $error-button-offset: 32px;
       margin-right: $options-panel-offset;
       overflow: hidden;
 
-      box-shadow: 2px 0 4px $light-color;
-
       padding: 0 8px 0 0;
 
       position: relative;
       z-index: 5;
 
-      transition: margin-right $timing-snappy $bouncy-ease-smoother;
+      transition: margin-right $timing-snappy $bouncy-ease-smoother,
+                  box-shadow $timing-snappy ease-out;
 
       .site-info {
         flex: 1 1 0;
@@ -88,36 +87,15 @@ $error-button-offset: 32px;
         padding: 4px 0 0;
         text-align: right;
 
-        .btn-edit, .btn-preview {
-          display: inline-block;
-          height: 24px;
-        }
-
-        .btn-edit {
-          background: $boring-gray;
-          -webkit-mask: url('../img/btn_edit.svg') center no-repeat;
-
-          margin-right: 11px;
-          width: 22px;
-          transition: color $timing-snappy linear, background-color $timing-snappy linear;
-
-          &:hover {
-            background: darken($boring-gray, 10%);
-          }
-
-          &:active {
-            background: darken($boring-gray, 15%);
-          }
-        }
-
         .btn-preview{
           background: $primary-color;
           -webkit-mask: url('../img/btn_preview.svg') center no-repeat;
           -webkit-mask-size: contain;
-          margin-right: 19px;
+          margin-right: 10px;
           opacity: 0;
           width: 0;
-
+          display: inline-block;
+          height: 24px;
           vertical-align: top;
 
           transition: background-color 100ms linear,
@@ -126,7 +104,7 @@ $error-button-offset: 32px;
                       width $timing-snappy $bouncy-ease;
 
           &.available {
-            margin-right: 9px;
+            margin-right: 0px;
             opacity: 1;
             width: 18px;
 
@@ -189,6 +167,7 @@ $error-button-offset: 32px;
       .btn-logs {
         display: inline-block;
         position: relative;
+        padding-right: 1px;
 
         .indicator {
           background-color: $error-color;
