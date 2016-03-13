@@ -16,8 +16,7 @@ let Logger = function () {
         time: new Date().valueOf()
       }
 
-      if (logEntry.logData.match(/error/i)) { logEntry.logType = "err" }
-      if (logEntry.logData.search("done\ in ") != -1) { logEntry.logType = "success" } // Not very reliable, but helps some
+      if (logEntry.logData.search("done\ in ") != -1) { logEntry.logType = "success" }
 
       if (logEntry.logType === "err") { siteController.reportErrorOnSite(server.reportTo, server.siteID); }
 
