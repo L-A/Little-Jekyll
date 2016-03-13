@@ -59,7 +59,9 @@ var Site = React.createClass({
         <div className="secondary-panel">
           <SimpleButton className="btn-remove" onClick={this.removeSiteFromList} hintText="Remove site from list"/>
           <SimpleButton className="btn-build" onClick={this.buildSite} hintText="Build site to..."/>
-          <SimpleButton className={siteInfo.serverActive ? (siteInfo.hasError ? "btn-logs available error" : "btn-logs available") : "btn-logs"} onClick={this.openServerLogs} hintText="Open logs"/>
+          <SimpleButton className={siteInfo.serverActive ? (siteInfo.hasError ? "btn-logs available error" : "btn-logs available") : "btn-logs"} onClick={this.openServerLogs} hintText="Open logs">
+            <div className="btn" /><div className="indicator" />
+          </SimpleButton>
           <SimpleButton className="btn-edit" onClick={this.toggleOptionsPanel} hintText="Toggle the options panel"/>
         </div>
       </li>

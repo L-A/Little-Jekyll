@@ -155,7 +155,7 @@ $error-button-offset: 32px;
 
       z-index: 2;
 
-      .btn-edit, .btn-remove, .btn-build, .btn-logs {
+      .btn-edit, .btn-remove, .btn-build, .btn-logs .btn {
         display: inline-block;
         vertical-align: middle;
         height: 28px;
@@ -187,15 +187,46 @@ $error-button-offset: 32px;
       }
 
       .btn-logs {
-        -webkit-mask: url('../img/btn_logs.svg') center no-repeat;
-        -webkit-mask-size: contain;
-        width: 0;
-        margin-right: 4px;
+        display: inline-block;
+        position: relative;
 
-        transition: width $timing-snappy $bouncy-ease;
+        .indicator {
+          background-color: $error-color;
+          border: 0px solid white;
+          border-radius: 8px;
+          content: "";
+          position: absolute;
+          top: 4px;
+          right: 0;
+          width: 10px;
+          height: 10px;
+          transform: scale(0);
+          transition: transform $timing-snappy $bouncy-ease,
+                      border-width $timing-snappy $bouncy-ease;
 
-        &.available { width: 20px; }
-        &.error { background: $error-color; }
+          box-shadow: 0 0 2px $light-color;
+        }
+
+        .btn {
+          -webkit-mask: url('../img/btn_logs.svg') center no-repeat;
+          -webkit-mask-size: contain;
+          width: 0;
+          margin-right: 4px;
+          margin-top: 1px;
+
+          transition: width $timing-snappy $bouncy-ease;
+        }
+
+        &.available .btn { top: 1px; width: 21px; }
+
+        &.error .indicator {
+          border-width: 2px;
+          height: 10px;
+          width: 10px;
+
+          transform: scale(1);
+          transition-delay: 120ms, 120ms;
+        }
       }
     }
   }

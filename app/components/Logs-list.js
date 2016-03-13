@@ -10,9 +10,18 @@ var LogsList = React.createClass({
     Dispatcher.send('getLogs');
     return {logs:[]};
   },
+  componentWillUpdate: function() {
+    var node = this.getDOMNode();
+    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+  },
+  componentDidUpdate: function() {
+    if (this.shouldScrollBottom) {
+      var node = this.getDOMNode();
+      node.scrollTop = node.scrollHeight
+    }
+  },
   receiveLogs: function (event, receivedLogs) {
     this.setState({logs: receivedLogs});
-    console.log(this.state.logs);
   },
   render: function () {
     if (this.state.logs != null && this.state.logs.length > 0) {
