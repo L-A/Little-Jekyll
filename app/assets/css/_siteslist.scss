@@ -1,6 +1,6 @@
 $options-panel-width: 148px;
 $options-panel-offset: 36px;
-$error-button-offset: 32px;
+$error-button-offset: 38px;
 
 .sites-list {
   flex: 1 1 auto;
@@ -124,7 +124,7 @@ $error-button-offset: 32px;
       height: 100%; // Apparently fixes a border flash?
       width: $options-panel-width;
 
-      padding-top: 20px;
+      padding-top: 18px;
       text-align: right;
 
       position: absolute;
