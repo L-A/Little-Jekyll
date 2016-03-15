@@ -8,6 +8,7 @@ var LogsList = React.createClass({
   getInitialState: function () {
     Dispatcher.createCallback('setLogs', this.receiveLogs);
     Dispatcher.send('getLogs');
+    this.shouldScroll = true;
     return {logs:[]};
   },
   handleScroll: function(e) {
