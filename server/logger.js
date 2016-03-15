@@ -13,7 +13,7 @@ let Logger = function () {
       var logEntry = {
         logType: logType || "std",
         logData: logData,
-        time: new Date().valueOf()
+        time: Date.now()
       }
 
       if (logEntry.logData.search("Error:") != -1) { logEntry.logType = "err" }
