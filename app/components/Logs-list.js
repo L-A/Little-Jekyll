@@ -10,18 +10,23 @@ var LogsList = React.createClass({
     Dispatcher.send('getLogs');
     return {logs:[]};
   },
-  componentWillUpdate: function() {
-    var node = this.getDOMNode();
-    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+  handleScroll: function(e) {
+    var node = this.node;
+    this.shouldScroll = node.scrollTop + node.offsetHeight === node.scrollHeight;
+    console.log(this.shouldScroll);
   },
-  componentDidUpdate: function() {
-    if (this.shouldScrollBottom) {
-      var node = this.getDOMNode();
-      node.scrollTop = node.scrollHeight
-    }
+  scrollDown: function() {
+    console.log("I should scroll down");
   },
   receiveLogs: function (event, receivedLogs) {
     this.setState({logs: receivedLogs});
+    this.node = require('react-dom').findDOMNode(this);
+  },
+  componentDidUpdate: function () {
+    if(this.shouldScroll) {
+      console.log("I should scroll down");
+      this.node.scrollTop = this.node.scrollHeight + 200;
+    }
   },
   render: function () {
     if (this.state.logs != null && this.state.logs.length > 0) {
@@ -31,9 +36,9 @@ var LogsList = React.createClass({
           );
       })
       return(
-        <VelocityTransitionGroup component="ul" className="logs-list" enter={{animation: "slideDown", stagger:25, duration: 300, easing: "easeInOutQuart", display: "flex"}} leave={{animation: "slideUp", easing: "easeInOutQuart", duration: 450, delay:175}}>
+        <ul className="logs-list" onScroll={this.handleScroll}>
           {logsNodes}
-        </VelocityTransitionGroup>
+        </ul>
       )
     } else {
       return (
