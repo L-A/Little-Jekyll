@@ -25,9 +25,9 @@ var LogsList = React.createClass({
   },
   render: function () {
     if (this.state.logs != null && this.state.logs.length > 0) {
-      var logsNodes = this.state.logs.map( function(data){
+      var logsNodes = this.state.logs.map( function(data, rank){
         return (
-          <Log key={data.time} log={data}/>
+          <Log key={(data.time + rank)} log={data}/>
           );
       })
       return(
