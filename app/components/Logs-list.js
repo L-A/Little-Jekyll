@@ -11,6 +11,9 @@ var LogsList = React.createClass({
     this.shouldScroll = true;
     return {logs:[]};
   },
+  componentDidMount: function() {
+    this.node = require('react-dom').findDOMNode(this);
+  },
   handleScroll: function(e) {
     var node = this.node;
     this.shouldScroll = node.scrollTop + node.offsetHeight === node.scrollHeight;
@@ -21,7 +24,6 @@ var LogsList = React.createClass({
   },
   receiveLogs: function (event, receivedLogs) {
     this.setState({logs: receivedLogs});
-    this.node = require('react-dom').findDOMNode(this);
   },
   componentDidUpdate: function () {
     if(this.shouldScroll) {
@@ -36,16 +38,12 @@ var LogsList = React.createClass({
           <Log key={(data.time + rank)} log={data}/>
           );
       })
-      return(
-        <ul className="logs-list" onScroll={this.handleScroll}>
-          {logsNodes}
-        </ul>
-      )
-    } else {
-      return (
-        <div className="empty-logs-list">Yo I'm a list</div>
-      );
     }
+    return(
+      <ul className="logs-list" onScroll={this.handleScroll}>
+        {logsNodes}
+      </ul>
+    )
   }
 })
 
