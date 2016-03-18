@@ -150,7 +150,7 @@ module.exports.osxMenu = function(app, appServer, mainWindow) {
   }];
 };
 
-module.exports.winLinMenu = function(app, appServer) {
+module.exports.winLinMenu = function(mainWindow, appServer) {
   return [{
     label: '&File',
     submenu: [{

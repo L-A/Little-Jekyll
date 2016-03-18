@@ -36,7 +36,7 @@ module.exports.initMain = function (appServer) {
     menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
   } else {
-    template = require("./menu.js").winLinMenu(appServer, mainWindow);
+    template = require("./menu.js").winLinMenu(mainWindow, appServer);
     menu = Menu.buildFromTemplate(template);
     mainWindow.setMenu(menu);
   }
