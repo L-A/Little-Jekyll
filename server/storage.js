@@ -10,7 +10,7 @@ var storableProperties = ["filePath", "id", "name"];
 module.exports.attemptToOpenSitesList = function (callback, sender) {
   fs.readFile(appDataPath, 'utf8', function (err, data) {
     if (err) {
-      return false;
+      callback([], sender);
     } else {
       callback(JSON.parse(data), sender);
     }
