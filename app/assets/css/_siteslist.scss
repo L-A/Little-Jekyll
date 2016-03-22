@@ -1,5 +1,5 @@
-$options-panel-width: 148px;
-$options-panel-offset: 36px;
+$options-panel-width: 146px;
+$options-panel-offset: 38px;
 $error-button-offset: 38px;
 
 .sites-list {
@@ -17,14 +17,33 @@ $error-button-offset: 38px;
     border-bottom: 1px solid #f1f2f2;
     overflow: hidden;
 
-    &:hover .main-panel,  &.error .main-panel{ box-shadow: 2px 0 4px $light-color; }
-    &.options-shown .main-panel,  &.options-shown.error .main-panel{
-      margin-right: $options-panel-width;
+    &:hover .main-panel,
+    &.error .main-panel{
+       box-shadow: 2px 0 4px $light-color;
+     }
+
+    &.options-shown .main-panel,
+    &.options-shown.error .main-panel{
+      margin-right: $options-panel-width - $error-button-offset;
       box-shadow: 2px 0 4px $light-color;
     }
 
     &.error .main-panel {
       margin-right: $options-panel-offset + $error-button-offset;
+    }
+
+    &.logs-available {
+      &.options-shown .main-panel {
+        margin-right: $options-panel-width;
+      }
+
+      .btn-logs.available {
+        width: auto;
+        .btn {
+          top: 1px;
+          width: 21px;
+        }
+      }
     }
 
     .main-panel{
@@ -124,7 +143,7 @@ $error-button-offset: 38px;
       height: 100%; // Apparently fixes a border flash?
       width: $options-panel-width;
 
-      padding-top: 18px;
+      padding-top: 12px;
       text-align: right;
 
       position: absolute;
@@ -136,7 +155,7 @@ $error-button-offset: 38px;
       .btn-edit, .btn-remove, .btn-build, .btn-logs .btn {
         display: inline-block;
         vertical-align: middle;
-        height: 28px;
+        height: 40px;
 
         background: $boring-gray;
         margin-left: 10px;
@@ -162,12 +181,14 @@ $error-button-offset: 38px;
 
       .btn-build {
         -webkit-mask: url('../img/btn_export.svg') center no-repeat;
+        margin-right: 1px;
       }
 
       .btn-logs {
         display: inline-block;
         position: relative;
         padding-right: 1px;
+        width: 0;
 
         .indicator {
           background-color: $error-color;
@@ -175,7 +196,7 @@ $error-button-offset: 38px;
           border-radius: 8px;
           content: "";
           position: absolute;
-          top: 4px;
+          top: 10px;
           right: 0;
           width: 10px;
           height: 10px;
@@ -195,8 +216,6 @@ $error-button-offset: 38px;
 
           transition: width $timing-snappy $bouncy-ease;
         }
-
-        &.available .btn { top: 1px; width: 21px; }
 
         &.error .indicator {
           border-width: 2px;
