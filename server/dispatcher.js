@@ -44,6 +44,17 @@ module.exports.addSite = function(sender) {
   }
 }
 
+module.exports.sendActivityState = function(sender, activity) {
+  if (sender || reporter) {
+    sender = sender ? sender : reporter;
+    if (activity) {
+      sender.send('activityStarted');
+    } else {
+      sender.send('activityStopped');
+    }
+  }
+}
+
 ipcMain.on('getLogs', function(event) {
   if (nextLogs) {
     event.sender.send('setLogs', nextLogs);

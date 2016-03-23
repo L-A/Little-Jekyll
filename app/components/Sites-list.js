@@ -7,13 +7,21 @@ import { VelocityElement, VelocityTransitionGroup } from 'velocity-react';
 var SitesList = React.createClass({
   getInitialState: function() {
     Dispatcher.createCallback('updateSitesList', this.receiveSitesList);
-    return {sites: null};
+    Dispatcher.createCallback('activityStarted', this.showActivity);
+    Dispatcher.createCallback('activityStopped', this.stopActivity);
+    return {sites: null, isActive: false};
   },
   componentDidMount: function() {
     Dispatcher.send('getSitesList');
   },
   receiveSitesList: function( event, list ) {
     this.setState({sites: list});
+  },
+  showActivity: function() {
+    this.setState({isActive:true});
+  },
+  stopActivity: function() {
+    this.setState({isActive:false})
   },
   render: function () {
     if (this.state.sites != null && this.state.sites.length > 0) {
@@ -29,7 +37,7 @@ var SitesList = React.createClass({
       )
     } else {
       return (
-        <EmptySitesList sitesReceived={this.state.sites == null ? false : true} />
+        <EmptySitesList isActive={this.state.isActive} sitesReceived={this.state.sites == null ? false : true} />
       );
     }
   }

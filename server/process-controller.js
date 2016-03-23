@@ -43,15 +43,18 @@ module.exports.newServer = function(requester, id, dir) {
 }
 
 module.exports.createNewSite = function(requester, dir) {
+  Dispatcher.sendActivityState(requester, true);
   var creatorProcess = childProcess.spawn(jekyllDist, ["new", dir]);
   creatorProcess.stdout.on('data',
     function (data) {
       sitesStore.addSite(requester, dir);
+      Dispatcher.sendActivityState(requester, false);
     }
   );
   creatorProcess.stderr.on('data',
     function (data) {
       Dispatcher.report("Creator error: " + data);
+      Dispatcher.sendActivityState(requester, false);
     }
   );
 }
