@@ -2,6 +2,7 @@ import Path from 'path';
 import { BrowserWindow, Menu, app } from 'electron';
 
 const appPath = Path.join('file:', app.getAppPath(), 'app');
+const appPath = Path.join(app.getAppPath(), 'app');
 const darwin = (process.platform === 'darwin');
 
 module.exports.initMain = function (appServer) {
@@ -16,7 +17,7 @@ module.exports.initMain = function (appServer) {
     acceptFirstMouse: true
   });
 
-  var url = Path.join(appPath, (process.env.HOT ? '/hot-dev-app.html' : 'app.html' ));
+  var url = Path.join("file://", appPath, (process.env.HOT ? '/hot-dev-app.html' : 'app.html' ));
 
   mainWindow.loadURL(url);
 
@@ -53,7 +54,7 @@ module.exports.initLogs = function () {
     acceptFirstMouse: true
   });
 
-  var url = Path.join(appPath, (process.env.HOT ? '/hot-dev-logs.html' : 'logs-index.html' ));
+  var url = Path.join("file://", appPath, (process.env.HOT ? '/hot-dev-logs.html' : 'logs-index.html' ));
 
   logsWindow.loadURL(url);
 
