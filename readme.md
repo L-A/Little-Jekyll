@@ -17,11 +17,9 @@ In two terminal sessions:
 - `npm run start-hot` for Electron to start in hot mode. The front-end components will auto-reload.
 
 ## Packaging
-- For now, `npm run package` does a test packaging of the Darwin (OS X) distributable.
-- Unused modules should be handpicked and removed from the package to help with its large size.
+- `npm run package` does a test packaging of the Darwin (OS X) distributable.
+- `npm run package-all` does Windows, Linux (x86, x64), and Darwin.
 
 ## License and acknowledgements
 
-Jekyll: MIT
-Electron: MIT
-This app: MIT
+License: [MIT](../blob/master/LICENSE)
