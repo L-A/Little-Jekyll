@@ -31,6 +31,8 @@ Temporary Items
 # If Sass goes crazy
 .sass-cache
 
-# Compiled by Webpack
+# Little-Jekyll specific
 dist/
 release/
+.install_cache/
+jekyll/
