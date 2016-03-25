@@ -24,7 +24,8 @@ const DEFAULT_OPTS = {
   overwrite: true,
   ignore: [
     '/test($|/)',
-    '/release($|/)'
+    '/release($|/)',
+    '/.install_cache($|/)'
   ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
 };
 
