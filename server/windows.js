@@ -1,15 +1,23 @@
 import Path from 'path';
 import { BrowserWindow, Menu, app } from 'electron';
 
-const appPath = Path.join('file:', app.getAppPath(), 'app');
 const appPath = Path.join(app.getAppPath(), 'app');
 const darwin = (process.platform === 'darwin');
+const win32 = (process.platform === 'win32');
 
 module.exports.initMain = function (appServer) {
   let menu;
   let template;
+  var iconPath = "";
+
+  if (!darwin) {
+    iconPath = Path.join( appPath, ( win32 ? "appicon.ico" : "appicon-512.png"));
+  }
+  console.log(iconPath);
+
   var mainWindow = new BrowserWindow({
     frame: false,
+    icon: (iconPath || null),
     width: 340,
     height: 260,
     minWidth: 340,
