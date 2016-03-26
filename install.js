@@ -5,17 +5,17 @@
 const http = require('http');
 const fs = require('fs');
 const zlib = require('zlib');
+const Path = require('path');
+const Request = require('request');
+const rimraf = require('rimraf');
 
 const argv = require('minimist')(process.argv.slice(2));
 
-const platform = argv.plat || process.platform;
-const arch = argv.arch || process.arch;
-
-const releases_URL = "http://github.com/L-A/Traveling-Jekyll/releases/download/";
+const releases_URL = "https://github.com/L-A/Traveling-Jekyll/releases/download/";
 const release_prefix = "/traveling-jekyll-";
 const release_suffix = ".tar.gz";
 const TJ_version = "v3.1.2a";
-const cache_location = ".install_cache"
+const cache_location = Path.join(__dirname, ".install_cache");
 
 const releases = {
   "darwin" : {
@@ -27,54 +27,47 @@ const releases = {
   }
 }
 
-const fileName = release_prefix + TJ_version + "-" + platformFor(platform, arch) + release_suffix;
-const localFile = require('path').join(__dirname, cache_location, fileName);
+function downloadLJRelease(platform, arch, cb) {
+  cb = cb || null;
+  var fileURL = releaseURL(platform, arch);
+  var localFile = localFilePath(platform, arch);
 
-function downloadLJRelease(platform, arch, dest) {
-  var fileURL = releaseURL(platformFor(platform, arch));
+  var extractDownloadedArchive = function() {
+    extract(platform, arch, cb);
+  }
 
   fs.access(localFile, fs.F_OK, function(err) {
     if (!err) {
-      console.log(dest + " archive is already there. Delete it to download a new version.");
-      extract(dest);
+      console.log("Traveling Jekyll archive found. Delete it (in '/.install-cache') to download a new version instead. ");
+      extractDownloadedArchive();
     } else {
-      console.log("Downloading from " + fileURL + " ...");
-      download(fileURL, localFile, function() {extract(dest)});
+      console.log("Downloading " + fileName(platform, arch));
+      download(fileURL, localFile, extractDownloadedArchive);
     }
   });
-
-}
-
-function platformFor(platform, arch) {
-  var correspondance = releases[platform][arch];
-  console.log(correspondance);
-  return correspondance || false;
-}
-
-function releaseURL(plat) {
-  if(platformFor(platform, arch)) {
-    return releases_URL + TJ_version + fileName;
-  } else {
-    return false;
-  }
 }
 
 function download(url, dest, cb) {
-  fs.mkdir(require('path').join(__dirname, cache_location));
-  require('request')(url, cb).pipe(fs.createWriteStream(dest));
+  mkdirSync(cache_location);
+  Request(url, cb)
+  .pipe(fs.createWriteStream(dest));
 }
 
-function extract(dest) {
-  console.log("Extracting " + localFile);
+function extract(platform, arch, cb) {
+  var localFile = localFilePath(platform, arch);
+  var jekyllPath = Path.join(__dirname, 'jekyll');
+  rmdirSync(jekyllPath);
+
   var extractor = require('tar').Extract({
-    path: require('path').join(__dirname, 'jekyll'),
+    path: jekyllPath,
     strip: 1
   });
   extractor.on('error', function(err) {
     console.log('Error: ' + err);
   });
-  extractor.on('end', function(e) {
-    console.log("Extracted!");
+  extractor.on('end', function() {
+    console.log("Traveling Jekyll for " + platform + " " + arch + " installed")
+    if(cb) { cb() };
   });
   fs.createReadStream(localFile)
   .on('error', function(err) {
@@ -82,10 +75,48 @@ function extract(dest) {
   })
   .pipe(zlib.createGunzip())
   .pipe(extractor);
+
+  console.log("Extracting... ");
 }
 
-function moveToParent() {
-
+function mkdirSync (path) {
+  try {
+    fs.mkdirSync(path);
+  } catch(e) {
+    if ( e.code != 'EEXIST' ) throw e;
+  }
 }
 
-downloadLJRelease(platform, arch, fileName);
+function rmdirSync (path) {
+  try {
+    rimraf.sync(path);
+  } catch(e) {
+    if ( e.code != 'ENOENT' ) throw e;
+  }
+}
+
+function platformFor(platform, arch) {
+  return releases[platform][arch];
+}
+
+function fileName(platform, arch) {
+  return release_prefix + TJ_version + "-" + platformFor(platform, arch) + release_suffix;
+}
+
+function localFilePath(platform, arch) {
+  return Path.join(cache_location, fileName(platform, arch));
+}
+
+function releaseURL(platform, arch) {
+  return releases_URL + TJ_version + fileName(platform, arch);
+}
+
+module.exports.installForTarget = function(platform, arch, cb){
+  downloadLJRelease(platform, arch, cb);
+}
+
+if(require.main === module) {
+  var platform = argv.plat || process.platform;
+  var arch = argv.arch || process.arch;
+  downloadLJRelease(platform, arch);
+}
