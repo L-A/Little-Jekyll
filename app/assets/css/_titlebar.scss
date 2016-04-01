@@ -24,6 +24,8 @@
     height: 18px;
     width: 18px;
 
+    -webkit-app-region: no-drag;
+
     transition: background-color $timing-snappy-btn linear;
 
     &:hover { background: darken($boring-gray, 50%); }
