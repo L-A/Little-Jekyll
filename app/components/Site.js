@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Dispatcher from '../utils/front-end-dispatcher';
 import SimpleButton from './simple-button.js';
+import Mousetrap from 'Mousetrap';
 import shell from 'shell';
 
 var Site = React.createClass({
@@ -36,10 +38,10 @@ var Site = React.createClass({
   },
   render: function () {
     var siteInfo = this.props.siteInfo;
-    var cellClass = (this.state.optionsShown ? "site-cell options-shown" : "site-cell") + (siteInfo.hasError ? " error" : "") + (siteInfo.serverActive ? " logs-available" : "");
+    var cellClass = (this.state.optionsShown ? "site-cell options-shown" : "site-cell") + (siteInfo.hasError ? " error" : "") + (siteInfo.serverActive ? " logs-available" : "") + (this.props.selected ? " selected" : "");
     var switchState = 'site-serve-switch ' + (siteInfo.serverWorking ? 'switch-working' : (siteInfo.serverActive ? 'switch-on' : 'switch-off'));
     return (
-      <li className={cellClass}>
+      <li className={cellClass} onClick={this.props.onClick}>
         <div className="main-panel">
           <SimpleButton className={switchState} onClick={this.toggleServerState} hintText="Start and stop this server">
             <div className="groove">

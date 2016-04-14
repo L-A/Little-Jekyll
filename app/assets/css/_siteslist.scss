@@ -16,6 +16,12 @@ $error-button-offset: 38px;
     z-index: 2;
     border-bottom: 1px solid #f1f2f2;
     overflow: hidden;
+    border-left: 4px solid transparent;
+    transition: border-left-color $timing-snappy-btn ease-out;
+
+    &.selected {
+      border-left: 4px solid $options-contrast-color;
+    }
 
     &:hover .main-panel,
     &.error .main-panel{
