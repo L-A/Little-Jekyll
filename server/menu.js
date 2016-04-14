@@ -116,7 +116,9 @@ module.exports.osxMenu = function(app, appServer, mainWindow) {
       label: 'Close',
       accelerator: 'Command+W',
       click() {
-        browserWindow.getFocusedWindow().hide();
+        if (browserWindow.getFocusedWindow() != null) {
+          browserWindow.getFocusedWindow().hide();
+        }
       }
     }, {
       type: 'separator'
