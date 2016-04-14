@@ -9,6 +9,17 @@ var Site = React.createClass({
   getInitialState: function() {
     return {optionsShown: false};
   },
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selected && !nextProps.selected) {
+      Mousetrap.unbind('space', this.toggleServerState);
+    }
+  },
+  componentDidUpdate() {
+    if (this.props.selected) {
+      Mousetrap.bind('space', this.toggleServerState);
+      ReactDOM.findDOMNode(this).scrollIntoViewIfNeeded();
+    }
+  },
   toggleServerState: function() {
     var message = this.props.siteInfo.serverActive ? 'stopServer' : 'startServer';
     Dispatcher.send(message, this.props.siteInfo.id);
