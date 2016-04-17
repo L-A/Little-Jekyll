@@ -13,9 +13,7 @@ var Site = React.createClass({
     if (this.props.selected && !nextProps.selected) {
       Mousetrap.unbind('space', this.toggleServerState);
     }
-  },
-  componentDidUpdate() {
-    if (this.props.selected) {
+    if (!this.props.selected && nextProps.selected) {
       Mousetrap.bind('space', this.toggleServerState);
       ReactDOM.findDOMNode(this).scrollIntoViewIfNeeded();
     }
