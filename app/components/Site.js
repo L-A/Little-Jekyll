@@ -12,9 +12,20 @@ var Site = React.createClass({
   componentWillReceiveProps(nextProps) {
     if (this.props.selected && !nextProps.selected) {
       Mousetrap.unbind('space', this.toggleServerState);
+      Mousetrap.unbind(['del', 'meta+backspace'], this.removeSiteFromList);
+      Mousetrap.unbind('meta+b', this.buildSite);
+      Mousetrap.unbind('o', this.openLocalServer);
+      Mousetrap.unbind('meta+l', this.openServerLogs);
+      Mousetrap.bind('meta+d', this.openFolder);
     }
     if (!this.props.selected && nextProps.selected) {
       Mousetrap.bind('space', this.toggleServerState);
+      Mousetrap.bind(['del', 'meta+backspace'], this.removeSiteFromList);
+      Mousetrap.bind('meta+b', this.buildSite);
+      Mousetrap.bind('o', this.openLocalServer);
+      Mousetrap.bind('meta+l', this.openServerLogs);
+      Mousetrap.bind('meta+d', this.openFolder);
+
       ReactDOM.findDOMNode(this).scrollIntoViewIfNeeded();
     }
   },
