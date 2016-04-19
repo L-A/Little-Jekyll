@@ -54,7 +54,9 @@ var Site = React.createClass({
   },
   buildSite: function() {
     Dispatcher.send('buildSite', this.props.siteInfo.id);
-    this.toggleOptionsPanel();
+    if (this.state.optionsShown) {
+      this.toggleOptionsPanel();
+    }
   },
   render: function () {
     var siteInfo = this.props.siteInfo;
