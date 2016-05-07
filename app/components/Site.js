@@ -11,7 +11,7 @@ var Site = React.createClass({
   },
   componentDidMount: function() {
     if (this.props.selected) {
-      this.ownKeyboardShortcuts(false);
+      this.ownKeyboardShortcuts(true);
     }
   },
   componentWillReceiveProps: function(nextProps) {
