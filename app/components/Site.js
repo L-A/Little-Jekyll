@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Dispatcher from '../utils/front-end-dispatcher';
 import SimpleButton from './simple-button.js';
 import Mousetrap from 'Mousetrap';
-import shell from 'shell';
+import {shell} from 'electron';
 
 var Site = React.createClass({
   getInitialState: function() {

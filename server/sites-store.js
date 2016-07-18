@@ -1,5 +1,5 @@
 import fs from 'fs';
-import dialog from 'dialog';
+import {dialog} from 'electron';
 import Dispatcher from './dispatcher';
 import siteController from './site-controller';
 import processController from './process-controller';
