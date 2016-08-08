@@ -31,7 +31,13 @@ module.exports.newServer = function(requester, id, dir) {
     notify: false,
     ui: false,
     logLevel: "silent", // I trust you BrowserSync
-    open: false
+    open: false,
+    watchOptions: {
+      awaitWriteFinish: {
+        stabilityThreshold: 300,
+        pollInterval: 50
+      }
+    }
   }, function(err, bs) {
     server.jekyllProcess = startServer(dir);
     server.localURL = bs.options.getIn(["urls", "local"]);
