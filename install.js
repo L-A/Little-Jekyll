@@ -14,7 +14,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const releases_URL = "https://github.com/L-A/Traveling-Jekyll/releases/download/";
 const release_prefix = "/traveling-jekyll-";
 const release_suffix = ".tar.gz";
-const TJ_version = "v3.1.2a";
+const TJ_version = "v3.1.2b";
 const cache_location = Path.join(__dirname, ".install_cache");
 
 const releases = {
