@@ -32,10 +32,11 @@ module.exports.newServer = function(requester, id, dir) {
     ui: false,
     logLevel: "silent", // I trust you BrowserSync
     open: false,
+    scrollRestoreTechnique: 'cookie',
     watchOptions: {
       awaitWriteFinish: {
-        stabilityThreshold: 300,
-        pollInterval: 50
+        stabilityThreshold: 1200,
+        pollInterval: 200
       }
     }
   }, function(err, bs) {
