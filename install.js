@@ -41,7 +41,7 @@ function downloadLJRelease(platform, arch, cb) {
       console.log("Traveling Jekyll archive found. Delete it (in '/.install-cache') to download a new version instead. ");
       extractDownloadedArchive();
     } else {
-      console.log("Downloading " + fileName(platform, arch));
+      console.log("Downloading " + fileURL);
       download(fileURL, localFile, extractDownloadedArchive);
     }
   });
