@@ -1,8 +1,16 @@
 # Little Jekyll
 
-A desktop app to manage Jekyll websites, overview and control your Jekyll processes.
+## **Development paused** (11/11/2016)
 
-Current status: Works 🎉 – in need of testing
+Since Jekyll has recently moved to [gem-based themes](http://jekyllrb.com/news/2016/07/26/jekyll-3-2-0-released/), my method for including an install-less Jekyll conflicts with the direction they are taking.
+
+It also (in my opinion) adds more obstacles to the learning steps that a beginner might take in learning to build for the web, which goes against the general mission I gave myself with Little Jekyll.
+
+<3
+
+---
+
+A desktop app to manage Jekyll websites, overview and control your Jekyll processes.
 
 ## Setup
 
