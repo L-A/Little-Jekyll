@@ -36,4 +36,4 @@ In two terminal sessions:
 
 ## License and acknowledgements
 
-License: [MIT](../blob/master/LICENSE)
+License: [MIT](../master/LICENSE)
