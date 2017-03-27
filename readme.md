@@ -10,6 +10,12 @@ It also (in my opinion) adds more obstacles to the learning steps that a beginne
 
 ---
 
+### To use gem-based themes with Little-Jekyll
+
+Any gem-based theme can be converted to the "old" way of including theme files in your repo: [Converting gem-based themes to regular themes](https://jekyllrb.com/docs/themes/#converting-gem-based-themes-to-regular-themes)
+
+---
+
 A desktop app to manage Jekyll websites, overview and control your Jekyll processes.
 
 ## Setup
